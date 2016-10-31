@@ -16,7 +16,7 @@ MVP criteria, which MUST be met by end of 2nd week, are as follow:
 * Hosting on Heroku
 * Bills CRUD
 * Add Friends
-* Transaction History (view should incorporate Activity Log in the future)
+* Transaction History / Recent Activity
 * Expense Comments
 * Production README, summarizing how each feature was implemented
 
@@ -33,9 +33,11 @@ In no particular order:
 * Bill creation - add PDF image
 * Upcoming bills view
 * Monthly trend
-* Split option
+* Split options (even, percentage, value)
 * Bill category
-* Activity log (transaction + other activity, such as comments and invites)
+* Activity log (activities such as comments and invites)
+* E-mail debt reminder
+* Auto Charity donation
 
 ## UI
 
@@ -53,19 +55,25 @@ Features covered on this screen:
 @@@@@ INCLUDE WIREFRAME LINKS @@@@@
 
 
-### Bills CRUD (Dashboard page)
+### Bills CRUD (Dashboard v0) + Comments
 
-The bills Read view will be the main screen of the app, serving as dashboard from where users are able to perform actions such as create, edit and/or delete bills.
+The bills Read view will be, at first, the main screen of the app, serving as dashboard from where users are able to perform actions such as create, edit and/or delete bills.
 
 Features covered on this screen:
+* Transaction History
 * Bill Read / Delete
 
 Features linked from this screen:
-* Bill Create / Update
-* Add Friends
-* View transaction history ( + (B) Activity log)
+* Bill Create / Update (overlay)
+* Add Friends (overlay)
 
-@@@@@ INCLUDE WIREFRAME LINKS @@@@@
+[Dashboard v0](./wireframes/DashboardV0.png)
+[Bill](./wireframes/Bill.png)
+
+
+### Friends
+[Friends](./wireframes/NewFriend.png)
+
 
 ### Bonus features
 
@@ -74,14 +82,28 @@ Such features will be accessible through the following views:
 | Feature                                    | Linked From | Feature Screen Name |
 |--------------------------------------------|:-----------:|:-------------------:|
 | Create Groups                              | Dashboard   | Groups              |
-| Monthly spend                              | Dashboard   | Bla                 |
-| Settling bills (Settle)                    | Dashboard   | Bla                 |
-| Upcoming bills                             | Dashboard   | Bla                 |
-| Monthly trend                              | Dashboard   | Bla                 |
-| Settling bills - manually record payment   | Settle      | Bla                 |
-| Settling bills - send money through PayPal | Settle      | Bla                 |
-| Bill creation - add PDF image              | Settle      | Bla                 |
-| Upcoming bills view                        | Settle      | Bla                 |
-| Monthly trend                              | Settle      | Bla                 |
-| Split option                               | Settle      | Bla                 |
-| Bill category                              | Settle      | Bla                 |
+| Settling bills                             | Dashboard   | Settle              |
+| Upcoming bills                             | Dashboard   | Dashboard-Upcoming  |
+| Monthly trend                              | Dashboard   | Dashboard-Trends    |
+| Settling bills - manually record payment   | Settle      | Manual Settle       |
+| Settling bills - send money through PayPal | Settle      | PayPal Settle       |
+| Bill creation - add PDF image              | Bill CU     | Bill Image          |
+| Upcoming bills view                        | Dashboard   | Upcoming            |
+| Monthly trend                              | Dashboard   | Trends              |
+| Split option                               | Bill CU     | Bill Split          |
+| Bill category                              | Bill CU     | Bill Category       |
+
+
+#### Dashboard v1
+Another Dashboard view is planned as a bonus feature, listing what and who a user owes and is owed. If this view is completed before the deadline, the app's routes will be updated as follows:
+
+*Dashboard v0*
+/dashboard -> Bills RD
+
+*Dashboard v1*
+/dashboard -> "Balance", "You Owe" | "You are owed" lists
+/all (expenses) -> Bills RD
+
+
+## React Components
+[Components Structure](./components)
