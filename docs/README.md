@@ -1,9 +1,9 @@
-# WeCheck
+# Diffindo
 
 
 ## Project Scope
 
-WeCheck is a web app inspired by SplitWise. It allows users to generate, settle and keep track of split bills with other users.
+Diffindo is a web app inspired by SplitWise. It allows users to generate, settle and keep track of split bills with other users.
 
 This app will be built on Ruby on Rails + React/Redux.
 
