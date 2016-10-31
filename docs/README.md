@@ -109,3 +109,11 @@ Another Dashboard view is planned as a bonus feature, listing what and who a use
 
 ## React Components
 [Components Structure](./components)
+
+
+## API
+[API Endpoints](./api-endpoints)
+
+
+## DB
+[DB Schema](./schema)
