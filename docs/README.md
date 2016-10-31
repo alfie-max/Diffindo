@@ -121,3 +121,29 @@ Another Dashboard view is planned as a bonus feature, listing what and who a use
 
 ## State
 [Sample State](./sample-state)
+
+
+## Implementation Timeline
+
+### Phase 1: Backend setup and Front End User Authentication (2 days)
+
+**Objective:** Functioning rails project with front-end Authentication
+
+### Phase 2: Bills Model, API, and components (2 days)
+
+**Objective:** Bills can be created, read, edited and destroyed through
+the API.
+
+### Phase 3: Transaction History (2 days)
+
+**Objective:** Display all bills on the dashboard, with links to CRUD operations
+
+### Phase 4: Friends (1 day)
+
+**Objective:** Friends can be invited through the API
+
+### Phase 5: Comments (1 days)
+
+**Objective:** Comments can be added to a specific bill through the API
+
+### Bonus Features are TBD
