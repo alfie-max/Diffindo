@@ -7,6 +7,14 @@ Diffindo is a web app inspired by SplitWise. It allows users to generate, settle
 
 This app will be built on Ruby on Rails + React/Redux.
 
+
+## Useful Links
+
+[Trello board](https://trello.com/b/Q8QynhnL/diffindo)
+
+Live App (coming soon...)
+
+
 ## MVP
 
 MVP criteria, which MUST be met by end of 2nd week, are as follow:
