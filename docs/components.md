@@ -39,18 +39,25 @@
 ### Bills
 
 **BillsContainer**
-  - FriendsList
+  - Friends
   - Errors
   - Comments
+  - Categories (bonus)
 
 
 ### Misc
+
+**FriendsContainer**
+ - Friends
 
 **AddFriendsContainer**
  - AddFriends
 
 **CommentsContainer**
  - Comments
+
+**CategoriesContainer**
+ - Categories
 
 
 ## Routes
@@ -64,3 +71,5 @@
 | "/home/bill/:billId" | "BillsContainer" |
 | "/home/bill/:billId/comments" | "CommentsContainer" |
 | "/home/friend/new" | "AddFriendsContainer" |
+| "/home/friends" | "FriendsContainer" |
+| "/home/categories" | "CategoriesContainer" |
