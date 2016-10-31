@@ -53,7 +53,7 @@ Features covered on this screen:
 * User log in
 * Guest log in
 
-@@@@@ INCLUDE WIREFRAME LINKS @@@@@
+[Splash Screen](./wireframes/Auth.png)
 
 
 ### Bills CRUD (Dashboard v0) + Comments
@@ -99,51 +99,51 @@ Such features will be accessible through the following views:
 #### Dashboard v1
 Another Dashboard view is planned as a bonus feature, listing what and who a user owes and is owed. If this view is completed before the deadline, the app's routes will be updated as follows:
 
-*Dashboard v0*
+**Dashboard v0**
 /dashboard -> Bills RD
 
-*Dashboard v1*
+**Dashboard v1**
 /dashboard -> "Balance", "You Owe" | "You are owed" lists
 /all (expenses) -> Bills RD
 
 
 ## React Components
-[Components Structure](./components)
+[Components Structure](./components.md)
 
 
 ## API
-[API Endpoints](./api-endpoints)
+[API Endpoints](./api-endpoints.md)
 
 
 ## DB
-[DB Schema](./schema)
+[DB Schema](./schema.md)
 
 
 ## State
-[Sample State](./sample-state)
+[Sample State](./sample-state.md)
 
 
 ## Implementation Timeline
 
 ### Phase 1: Backend setup and Front End User Authentication (2 days)
 
-**Objective:** Functioning rails project with front-end Authentication
+**Objective:** Functioning rails project with front-end Authentication.
 
 ### Phase 2: Bills Model, API, and components (2 days)
 
-**Objective:** Bills can be created, read, edited and destroyed through
+**Objective:** Bills can be created, read, edited and destroyed through.
 the API.
 
 ### Phase 3: Transaction History (2 days)
 
-**Objective:** Display all bills on the dashboard, with links to CRUD operations
+**Objective:** Display all bills on the dashboard, with links to CRUD operations.
 
 ### Phase 4: Friends (1 day)
 
-**Objective:** Friends can be invited through the API
+**Objective:** Friends can be invited through the API.
 
 ### Phase 5: Comments (1 days)
 
-**Objective:** Comments can be added to a specific bill through the API
+**Objective:** Comments can be added to a specific bill through the API.
 
 ### Bonus Features are TBD
