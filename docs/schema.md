@@ -17,6 +17,7 @@ column name | data type | details
 id          | integer   | not null, primary key
 title       | string    | not null
 amount      | text      | not null
+category_id | integer   | not null, foreign key (references categories), indexed
 author_id   | integer   | not null, foreign key (references users), indexed
 payer_id    | integer   | not null, foreign key (references users), indexed
 date        | date      | not null
@@ -38,3 +39,14 @@ column name | data type | details
 id          | integer   | not null, primary key
 author_id   | integer   | not null, foreign key (references users), indexed
 bill_id     | integer   | not null, foreign key (references bills), indexed
+body        | string    | not null
+
+
+# BONUS
+
+## categories
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+name        | string    | not null
+parent_id   | integer   | not null, foreign key (references categories)
