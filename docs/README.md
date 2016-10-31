@@ -38,6 +38,7 @@ In no particular order:
 * Activity log (activities such as comments and invites)
 * E-mail debt reminder
 * Auto Charity donation
+* Add friends from Bill create screen
 
 ## UI
 
@@ -68,6 +69,7 @@ Features linked from this screen:
 * Add Friends (overlay)
 
 [Dashboard v0](./wireframes/DashboardV0.png)
+
 [Bill](./wireframes/Bill.png)
 
 
