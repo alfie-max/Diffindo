@@ -18,3 +18,6 @@ app/assets/javascripts/bundle*
 
 * Ignore Apple system file
 *.DS_Store
+
+* Ignore byebug history
+.byebug_history
