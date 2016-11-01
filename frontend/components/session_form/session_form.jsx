@@ -21,7 +21,8 @@ class SessionForm extends React.Component {
   }
 
   redirectIfLoggedIn() {
-    if (this.props.loggedIn) this.props.router.push("/");
+    //We don't want to create a new hashHistory object, but replace the existing one
+    if (this.props.loggedIn) this.props.router.replace("/");
   }
 
   switchForms() {

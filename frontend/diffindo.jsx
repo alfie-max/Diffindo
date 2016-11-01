@@ -10,7 +10,21 @@ import { signup, login, logout } from './actions/session_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const rootEl = document.getElementById("root");
-  const store = configureStore();
+  let store;
+
+  //We need this to keep the user logged in, even if they refresh the page (user bootstraping)
+  if (window.currentUser) {
+    const preloadedState = {
+      session: {
+        currentUser: window.currentUser,
+        errors: []
+      }
+    }
+    store = configureStore(preloadedState);
+  } else {
+    store = configureStore();
+  };
+
   ReactDOM.render(<Root store={store} />, rootEl);
 
   /*TESTING*/
