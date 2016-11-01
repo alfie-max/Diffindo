@@ -12,7 +12,7 @@ class Api::UsersController < ApplicationController
       errors = @user.errors.full_messages
       if errors.any? {|err| err.include?("already been taken")}
         status_code = 401
-      elsif errors.any? {|err| err.include?("Password is too short")}
+      else
         status_code = 422
       end
       render json: @user.errors.full_messages, status: status_code

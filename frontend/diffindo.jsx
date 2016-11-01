@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-// import Root from './components/root';
+import Root from './components/root';
 
 /*TESTING*/
 // import { signup, login, logout } from './util/session_api_util';
@@ -11,7 +11,7 @@ import { signup, login, logout } from './actions/session_actions';
 document.addEventListener("DOMContentLoaded", () => {
   const rootEl = document.getElementById("root");
   const store = configureStore();
-  ReactDOM.render(<h1>Diffindo!</h1>, rootEl);
+  ReactDOM.render(<Root store={store} />, rootEl);
 
   /*TESTING*/
   window.u1 = {user: {username: "eric", password: "blabla", activated: true}};

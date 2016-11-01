@@ -16,7 +16,7 @@ import { login, logout, signup } from '../util/session_api_util';
 const sessionMiddleware = ({ dispatch }) => next => action => {
 
   const receiveCurrentUserSuccess = (data) => dispatch(receiveCurrentUser(data));
-  const receiveCurrentUserErrors = (error) => dispatch(receiveErrors(error));
+  const receiveCurrentUserErrors = (error) => dispatch(receiveErrors(error.responseJSON));
 
   switch (action.type) {
 

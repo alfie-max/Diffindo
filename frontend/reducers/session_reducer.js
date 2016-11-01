@@ -3,7 +3,8 @@ import merge from 'lodash/merge';
 import {
   LOGOUT,
   RECEIVE_CURRENT_USER,
-  RECEIVE_ERRORS
+  RECEIVE_ERRORS,
+  CLEAR_ERRORS
 } from '../actions/session_actions.js'
 
 const _defaultState = {
@@ -23,12 +24,18 @@ const SessionReducer = (state = _defaultState, action) => {
       return merge({}, _defaultState, {currentUser});
 
     case RECEIVE_ERRORS:
-      // We want to store the errors as an array of error objs.
-      const errors = [action.errors];
-      return merge({}, state, {errors});
+      const errors = action.errors;
+      return merge({}, _defaultState, {errors});
 
     case LOGOUT:
       return _defaultState;
+
+    case CLEAR_ERRORS:
+      if (state.errors.length > 0) {
+        let newState = merge({}, state);
+        newState.errors = [];
+        return newState;
+      };
 
     default:
       return state;

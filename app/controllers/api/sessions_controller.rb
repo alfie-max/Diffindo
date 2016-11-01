@@ -8,7 +8,8 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render "api/users/show"
     else
-      render json: "Oops, wrong credentials.", status: 404
+      #The FE's reducer expects an array of error messages
+      render json: ["Oops, wrong credentials."], status: 404
     end
 
   end
@@ -18,7 +19,8 @@ class Api::SessionsController < ApplicationController
       logout
       render json: {}
     else
-      render json: "No user currently logged in.", status: 404
+      #The FE's reducer expects an array of error messages
+      render json: ["No user currently logged in."], status: 404
     end
   end
 
