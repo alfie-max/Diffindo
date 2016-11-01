@@ -41,5 +41,25 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
 
+  # Use postgresql as the database for Active Record
+  gem 'pg', '~> 0.15'
+
+  # Run 'annotate' in Terminal to add helpful comments to models.
+  gem 'annotate'
+
+  # These two give you a great error handling page.
+  # But make sure to never use them in production!
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  # Gotta have byebug...
+  gem 'byebug'
+
+  # pry > irb
+  gem 'pry-rails'
+
+  # BCrypt
+  gem 'bcrypt'
+
+end
