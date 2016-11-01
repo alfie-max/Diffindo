@@ -2,6 +2,7 @@
 
 ## users
 When a user receives an invite from another user, an account is created with a 'false' activated flag. When a user tries to create an account , we check for matching emails/username. If exists, but 'activated' flag is false, user is able to create their account and overwrite username.
+
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
