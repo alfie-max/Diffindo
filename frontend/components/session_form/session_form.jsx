@@ -62,29 +62,36 @@ class SessionForm extends React.Component {
   render() {
     const alternativeEntrance = (this.props.formType === "login") ? "signup" : "login";
     return (
-      <div>
-        <h2>{this.props.formType}</h2>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderErrors()}
-          <label htmlFor="username">Username</label>
-          <input type="text" name="user[username]" id="username" onChange={this.update("username")}/>
-          <br/>
-          <br/>
+      <div className = "splash-screen">
+        <div className="splash-screen-logo"><img src="http://placehold.it/100x100"/>
+</div>
+        <h1>Split the <span>check</span> with <span>a friend</span></h1>
+        <div className="session-form-wrapper">
+          <form onSubmit={this.handleSubmit}>
+            {this.renderErrors()}
+            <label htmlFor="username">Username</label>
+            <br/>
+            <input type="text" name="user[username]" id="username" onChange={this.update("username")}/>
+            <br/>
+            <br/>
 
-          <label htmlFor="email">Email</label>
-          <input type="text" name="user[email]" id="email" onChange={this.update("email")}/>
-          <br/>
-          <br/>
+            <label htmlFor="email">Email</label>
+            <br/>
+            <input type="text" name="user[email]" id="email" onChange={this.update("email")}/>
+            <br/>
+            <br/>
 
-          <label htmlFor="password">Password</label>
-          <input type="password" name="user[password]" id="password" onChange={this.update("password")}/>
-          <br/>
-          <br/>
+            <label htmlFor="password">Password</label>
+            <br/>
+            <input type="password" name="user[password]" id="password" onChange={this.update("password")}/>
+            <br/>
+            <br/>
 
-          <button>Submit</button>
-          <br/>
-        </form>
-        {this.alternativeEntrance()}
+            <button>Submit</button>
+            <br/>
+          </form>
+          {this.alternativeEntrance()}
+        </div>
       </div>
     )
   }
