@@ -3,6 +3,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
+import LeftSidebar from './left_sidebar/left_sidebar_container';
 
 const Root = ({store}) => {
 
@@ -16,6 +17,7 @@ const Root = ({store}) => {
     <Provider store={store}>
       <Router history={hashHistory}>
         <Route path="/" component={App}>
+          <IndexRoute component={LeftSidebar} />
           <Route path="/login" component={SessionFormContainer} onEnter={redirectIfLoggedIn}/>
           <Route path="/signup" component={SessionFormContainer} onEnter={redirectIfLoggedIn}/>
         </Route>
