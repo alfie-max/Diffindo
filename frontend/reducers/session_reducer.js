@@ -1,3 +1,4 @@
+import {hashHistory} from 'react-router';
 import merge from 'lodash/merge';
 
 import {
@@ -21,6 +22,7 @@ const SessionReducer = (state = _defaultState, action) => {
     case RECEIVE_CURRENT_USER:
       const currentUser = action.currentUser;
       // If I'm receiveing currentUser, I don't care about past state's errors, so I'll just merge the new currentUser with the _defaultState
+      // hashHistory.push("/dashboard");
       return merge({}, _defaultState, {currentUser});
 
     case RECEIVE_ERRORS:
@@ -28,6 +30,7 @@ const SessionReducer = (state = _defaultState, action) => {
       return merge({}, _defaultState, {errors});
 
     case LOGOUT:
+      hashHistory.push("/");
       return _defaultState;
 
     case CLEAR_ERRORS:

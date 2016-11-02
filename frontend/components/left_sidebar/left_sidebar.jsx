@@ -10,8 +10,7 @@ class LeftSidebar extends React.Component {
   }
 
   handleLogout() {
-    this.props.logout()
-    this.props.router.push("/");
+    this.props.logout();
   };
 
   render() {
