@@ -12,7 +12,7 @@ class SessionForm extends React.Component {
       activated: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.update = this.update.bind(this);
+    this.handleGuestLogin = this.handleGuestLogin.bind(this);
     this.switchForms = this.switchForms.bind(this);
   }
 
@@ -23,7 +23,7 @@ class SessionForm extends React.Component {
   redirectIfLoggedIn() {
     //This is to redirect AFTER login/signup.
     //The one on root.jsx is for someone who goes straight to login/signup while being logged in
-    if (this.props.loggedIn) this.props.router.push("/");
+    if (this.props.loggedIn) this.props.router.push("/dashboard");
   }
 
   switchForms() {
@@ -33,7 +33,24 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(e);
     const user = this.state;
+    this.props.processForm({user});
+  }
+
+  handleGuestLogin(e) {
+    e.preventDefault();
+
+    const emailField = "meryl@burbankgalaxy.com";
+    $("input")[0].value = emailField;
+
+    const passwordField = "password";
+    $("input")[1].value = passwordField;
+
+    const user = {
+      email: emailField,
+      password: passwordField
+    };
     this.props.processForm({user});
   }
 
@@ -41,9 +58,13 @@ class SessionForm extends React.Component {
     return e => this.setState({[property]: e.target.value})
   }
 
+  isLoginForm() {
+    return this.props.formType === "login"
+  }
+
   renderErrors() {
     return (
-      <ul>
+      <ul className="session-form-errors">
         {this.props.errors.map( (err, idx) => (
           <li key={`error-${idx}`}>{err}</li>
         ))}
@@ -51,8 +72,38 @@ class SessionForm extends React.Component {
     )
   }
 
+  renderButtons() {
+
+    if (this.isLoginForm()) {
+      return (
+        <div className="session-form-buttons">
+          <button className="user-login-btn"
+            onClick={this.handleSubmit}>Login</button>
+          <button className="guest-login-btn"
+            onClick={this.handleGuestLogin}>Guest Login</button>
+        </div>
+      );
+    } else {
+      return (<button onClick={this.handleSubmit}>Signup</button>);
+    }
+  }
+
+  renderUserNameField() {
+    if (!this.isLoginForm()) {
+      return (
+        <div>
+          <label htmlFor="username">How do you want to be called?</label>
+          <br/>
+          <input type="text" name="user[username]" id="username" onChange={this.update("username")}/>
+          <br/>
+          <br/>
+        </div>
+      );
+    };
+  }
+
   alternativeEntrance() {
-    if (this.props.formType === "login") {
+    if (this.isLoginForm()) {
       return <Link to="/signup" onClick={this.switchForms}>Sign up instead</Link>;
     } else {
       return <Link to="/login" onClick={this.switchForms}>Log in instead</Link>;
@@ -60,20 +111,25 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    const alternativeEntrance = (this.props.formType === "login") ? "signup" : "login";
+    const formTitle =
+      this.props.formType.charAt(0).toUpperCase() + this.props.formType.slice(1);
+
+    const alternativeEntrance = (this.isLoginForm()) ? "signup" : "login";
+
     return (
       <div className = "splash-screen">
         <div className="splash-screen-logo"><img src="http://placehold.it/100x100"/>
 </div>
         <h1>Split the <span>check</span> with <span>a friend</span></h1>
         <div className="session-form-wrapper">
-          <form onSubmit={this.handleSubmit}>
+
+          <h2>{formTitle}</h2>
+
+          <form>
+
             {this.renderErrors()}
-            <label htmlFor="username">Username</label>
-            <br/>
-            <input type="text" name="user[username]" id="username" onChange={this.update("username")}/>
-            <br/>
-            <br/>
+
+            {this.renderUserNameField()}
 
             <label htmlFor="email">Email</label>
             <br/>
@@ -87,7 +143,7 @@ class SessionForm extends React.Component {
             <br/>
             <br/>
 
-            <button>Submit</button>
+            {this.renderButtons()}
             <br/>
           </form>
           {this.alternativeEntrance()}

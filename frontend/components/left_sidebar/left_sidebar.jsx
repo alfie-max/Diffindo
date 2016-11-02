@@ -6,30 +6,21 @@ class LeftSidebar extends React.Component {
 
   constructor(props) {
     super(props);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  HOW TO MAKE THIS STOP THE RENDER?
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser === null) {
-      this.redirectIfLoggedOut();
-    }
-  }
-
-  redirectIfLoggedOut() {
-    this.props.router.push("/login");
-  }
-
+  handleLogout() {
+    this.props.logout()
+    this.props.router.push("/");
+  };
 
   render() {
-
-    const handleLogout = () => (
-      this.props.logout()
-    );
+    // debugger;
 
     return(
       <div>
         <h2>Hello, {this.props.currentUser.username}</h2>
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={this.handleLogout}>Logout</button>
       </div>
     );
   }

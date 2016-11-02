@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
     #Use this to look for a friend who has been added by another user. If found, check for activated flag and proceed accordingly
   end
 
-  def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
     return nil unless user
     user.bcrypt_pwd.is_password?(password) ? user : nil
   end

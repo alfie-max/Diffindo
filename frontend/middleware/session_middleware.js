@@ -28,7 +28,7 @@ const sessionMiddleware = ({ dispatch }) => next => action => {
       // When a user logs out, there's no error cb. The success cb should only clear currentUser and the errors array, which is done on the reducer end. Hence, the success cb for the logout API call is to go to the reducer (next(action)).
       // logout( () => next(action));
       logout( (() => next(action)), receiveCurrentUserErrors);
-      return next(action);
+      break;
 
     case SIGNUP:
       signup(action.user, receiveCurrentUserSuccess, receiveCurrentUserErrors);
