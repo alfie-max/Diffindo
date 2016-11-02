@@ -14,7 +14,6 @@ class LeftSidebar extends React.Component {
   };
 
   render() {
-    // debugger;
 
     return(
       <div>
@@ -25,4 +24,4 @@ class LeftSidebar extends React.Component {
   }
 }
 
-export default withRouter(LeftSidebar);
+export default LeftSidebar;

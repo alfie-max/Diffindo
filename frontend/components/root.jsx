@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
-import LeftSidebarContainer from './left_sidebar/left_sidebar_container';
+import DashboardContainer from './dashboard/dashboard_container';
 
 const Root = ({store}) => {
 
@@ -29,7 +29,7 @@ const Root = ({store}) => {
             onEnter={redirectIfLoggedIn}/>
           <Route path="/signup" component={SessionFormContainer}
             onEnter={redirectIfLoggedIn}/>
-          <Route path="/dashboard" component={LeftSidebarContainer}
+          <Route path="/dashboard" component={DashboardContainer}
             onEnter={redirectIfLoggedOut}/>
         </Route>
       </Router>

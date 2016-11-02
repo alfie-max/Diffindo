@@ -20,10 +20,6 @@ class SessionForm extends React.Component {
     this.redirectIfLoggedIn();
   }
 
-  // componentWillMount() {
-  //   this.redirectIfLoggedIn();
-  // }
-
   redirectIfLoggedIn() {
     //This is to redirect AFTER login/signup.
     //The one on root.jsx is for someone who goes straight to login/signup while being logged in
