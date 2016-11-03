@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
 import DashboardContainer from './dashboard/dashboard_container';
+import { requestAllBills } from '../actions/bills_actions';
 
 const Root = ({store}) => {
 
@@ -13,6 +14,11 @@ const Root = ({store}) => {
     if (currentUser) replace("/");
   }
 
+  const handleEnterDashboard = (nextState, replace) => {
+    redirectIfLoggedOut(nextState, replace);
+    displayAllBills();
+  }
+
   const redirectIfLoggedOut = (nextState, replace) => {
     const currentUser = store.getState().session.currentUser;
     if (!currentUser){
@@ -20,11 +26,13 @@ const Root = ({store}) => {
     }
   }
 
+  const displayAllBills = () => store.dispatch(requestAllBills());
+
   return (
     <Provider store={store}>
       <Router history={hashHistory}>
         <Route path="/" component={App}>
-          <IndexRoute component={DashboardContainer} onEnter={redirectIfLoggedOut}/>
+          <IndexRoute component={DashboardContainer} onEnter={handleEnterDashboard}/>
           <Route path="/login" component={SessionFormContainer}
             onEnter={redirectIfLoggedIn}/>
           <Route path="/signup" component={SessionFormContainer}

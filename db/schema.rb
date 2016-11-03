@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101182800) do
+ActiveRecord::Schema.define(version: 20161102234257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.float    "amount",      null: false
+    t.integer  "category_id", null: false
+    t.integer  "author_id",   null: false
+    t.integer  "payer_id",    null: false
+    t.date     "date",        null: false
+    t.string   "doc_url"
+    t.string   "split_type",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "bills", ["author_id"], name: "index_bills_on_author_id", using: :btree
+  add_index "bills", ["category_id"], name: "index_bills_on_category_id", using: :btree
+  add_index "bills", ["payer_id"], name: "index_bills_on_payer_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false

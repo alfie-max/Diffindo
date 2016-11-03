@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router';
-import LeftSidebarContainer from '../left_sidebar/left_sidebar_container'
+import LeftSidebarContainer from '../left_sidebar/left_sidebar_container';
+import BillsContainer from '../bills/bills_container';
 
 class Dashboard extends React.Component {
 
@@ -11,10 +12,13 @@ class Dashboard extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     console.log("componentWillUpdate");
-    debugger
     if (!this.props.currentUser) {
       this.props.router.push("/login");
     }
+  }
+
+  componentWillMount() {
+    
   }
 
   render() {
@@ -22,6 +26,7 @@ class Dashboard extends React.Component {
     return(
       <div>
         <LeftSidebarContainer />
+        <BillsContainer />
       </div>
     );
   }

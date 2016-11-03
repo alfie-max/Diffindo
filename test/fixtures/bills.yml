@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: bills
+#
+#  id          :integer          not null, primary key
+#  title       :string           not null
+#  amount      :float            not null
+#  category_id :integer          not null
+#  author_id   :integer          not null
+#  payer_id    :integer          not null
+#  date        :date             not null
+#  doc_url     :string
+#  split_type  :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  amount: 1.5
+  category_id: 1
+  author_id: 1
+  payer_id: 1
+  date: 2016-11-02
+  doc_url: MyString
+  split_type: MyString
+
+two:
+  title: MyString
+  amount: 1.5
+  category_id: 1
+  author_id: 1
+  payer_id: 1
+  date: 2016-11-02
+  doc_url: MyString
+  split_type: MyString

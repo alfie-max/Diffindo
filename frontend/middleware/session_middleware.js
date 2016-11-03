@@ -16,7 +16,6 @@ import { login, logout, signup } from '../util/session_api_util';
 // It is common to deconstruct the store and get the dispatch function
 
 const sessionMiddleware = ({ dispatch }) => next => action => {
-
   const receiveCurrentUserSuccess = (data) => dispatch(receiveCurrentUser(data));
   const receiveCurrentUserErrors = (error) => dispatch(receiveErrors(error.responseJSON));
   const successLogout = () => {

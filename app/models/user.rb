@@ -1,8 +1,32 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  username        :string           not null
+#  email           :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  activated       :boolean          not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class User < ActiveRecord::Base
 
   validates :username, :email, :password_digest, :session_token, :activated, presence: true
   validates :username, :email, :session_token, uniqueness: true;
   validates :password, length: {minimum: 6, allow_nil: true}
+
+  has_many :bills, dependent: :destroy,
+    primary_key: :id,
+    foreign_key: :author_id,
+    class_name: :Bill
+
+  has_many :paying_bills,
+    primary_key: :id,
+    foreign_key: :payer_id,
+    class_name: :Bill
 
   after_initialize :ensure_session_token
 
