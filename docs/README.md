@@ -112,6 +112,7 @@ Another Dashboard view is planned as a bonus feature, listing what and who a use
 
 **Dashboard v1**
 /dashboard -> "Balance", "You Owe" | "You are owed" lists
+
 /all (expenses) -> Bills RD
 
 
