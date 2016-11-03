@@ -1,4 +1,3 @@
-import {hashHistory} from 'react-router';
 import merge from 'lodash/merge';
 
 import {
@@ -30,7 +29,7 @@ const SessionReducer = (state = _defaultState, action) => {
       return merge({}, _defaultState, {errors});
 
     case LOGOUT:
-      hashHistory.push("/");
+    console.log("Before return from reducer");
       return _defaultState;
 
     case CLEAR_ERRORS:

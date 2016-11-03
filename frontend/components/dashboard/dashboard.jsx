@@ -9,6 +9,14 @@ class Dashboard extends React.Component {
     super(props);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillUpdate");
+    debugger
+    if (!this.props.currentUser) {
+      this.props.router.push("/login");
+    }
+  }
+
   render() {
 
     return(
@@ -19,4 +27,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);

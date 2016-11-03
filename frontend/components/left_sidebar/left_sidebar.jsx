@@ -14,6 +14,7 @@ class LeftSidebar extends React.Component {
   };
 
   render() {
+    console.log("Trying to render");
 
     return(
       <div>

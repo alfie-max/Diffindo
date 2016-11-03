@@ -10,13 +10,13 @@ const Root = ({store}) => {
   const redirectIfLoggedIn = (nextState, replace) => {
     //We don't want to create a new hashHistory object, but replace the existing one
     const currentUser = store.getState().session.currentUser;
-    if (currentUser) replace("/dashboard");
+    if (currentUser) replace("/");
   }
 
   const redirectIfLoggedOut = (nextState, replace) => {
     const currentUser = store.getState().session.currentUser;
     if (!currentUser){
-      replace("/");
+      replace("/login");
     }
   }
 
@@ -24,13 +24,11 @@ const Root = ({store}) => {
     <Provider store={store}>
       <Router history={hashHistory}>
         <Route path="/" component={App}>
-          <IndexRoute component={SessionFormContainer} />
+          <IndexRoute component={DashboardContainer} onEnter={redirectIfLoggedOut}/>
           <Route path="/login" component={SessionFormContainer}
             onEnter={redirectIfLoggedIn}/>
           <Route path="/signup" component={SessionFormContainer}
             onEnter={redirectIfLoggedIn}/>
-          <Route path="/dashboard" component={DashboardContainer}
-            onEnter={redirectIfLoggedOut}/>
         </Route>
       </Router>
     </Provider>

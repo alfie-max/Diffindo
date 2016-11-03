@@ -23,7 +23,7 @@ class SessionForm extends React.Component {
   redirectIfLoggedIn() {
     //This is to redirect AFTER login/signup.
     //The one on root.jsx is for someone who goes straight to login/signup while being logged in
-    if (this.props.loggedIn) this.props.router.push("/dashboard");
+    if (this.props.loggedIn) this.props.router.push("/");
   }
 
   switchForms() {
