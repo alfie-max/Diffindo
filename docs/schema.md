@@ -33,7 +33,7 @@ column name | data type | details
 id          | integer   | not null, primary key
 bill_id     | string    | not null, foreign key (references bills), indexed
 user_id     | integer   | not null, foreign key (references users), indexed
-amount      | integer   | not null
+amount      | flot      | not null
 
 ## comments
 column name | data type | details
