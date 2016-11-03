@@ -17,7 +17,7 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 title       | string    | not null
-amount      | text      | not null
+amount      | float     | not null
 category_id | integer   | not null, foreign key (references categories), indexed
 author_id   | integer   | not null, foreign key (references users), indexed
 payer_id    | integer   | not null, foreign key (references users), indexed
@@ -27,6 +27,7 @@ split_type  | string    | not null
 
 ## splits
 Splits can happen between users and/or users and friends who don't yet have an account. Friends are still users, with a deactivated account.
+
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key

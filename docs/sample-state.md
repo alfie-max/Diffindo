@@ -11,7 +11,7 @@
   },
   bills: {
     1: {
-      description: "6 pack",
+      title: "6 pack",
       payer_id: 2,
       date: "Jan 8 1998",
       split_type: "percent",
