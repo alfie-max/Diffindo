@@ -31,7 +31,30 @@ class Bill < ActiveRecord::Base
     foreign_key: :payer_id,
     class_name: :User
 
-  has_many :splits, dependent: :destroy
+  has_many :splits, inverse_of: :bill, dependent: :destroy
+
+  # splitUsers = {
+    # user1.id: {
+      # amount: 45
+    # },
+    # user2.id: {
+      # amount: 55
+    # }
+  # }
+
+  # splitUsers.keys.map( splitUserId => {
+    # split_attrs.push({user_id: splitUserId, amount: splitUsers[splitUserId]})
+  # })
+
+  # params = { title: "blabla", amount: 100, ....... , splits_attributes: split_attrs }
+  # Bill.create(params)
+
+  # WHAT IF:
+  # 1) Bill is invalid? Does it create the bill and/or the splits?
+  # 2) Split is invalid? Does it create the bill and/or the splits?
+
+  # See BillsController#bill_params for explanation on allow_destroy
+  accepts_nested_attributes_for :splits, allow_destroy: true
 
   has_many :split_with,
     through: :splits,

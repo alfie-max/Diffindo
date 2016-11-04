@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
     session[:session_token] = nil
   end
 
+  def require_signed_in!
+    unless current_user
+      render json: ["You need to log in first"], status: 403
+    end
+  end
+
 end

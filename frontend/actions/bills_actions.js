@@ -8,7 +8,6 @@ export const DELETE_BILL = "DELETE_BILL";
 
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 
-//user is an object coming from the login form
 export const requestAllBills = () => ({
   type: REQUEST_ALL_BILLS
 })

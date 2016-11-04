@@ -12,12 +12,13 @@
 
 class Split < ActiveRecord::Base
 
-  validates :bill_id, :user_id, presence: true
+  # The presence of bill has to be validates instead of bill_id so the inverse_of / accepts_nested_attributes_for can work properly. If not, it will raise an error saying "Split bills can't be blank"
+  validates :bill, :user_id, presence: true
 
   #Each user can only be entered once as a split payer for each bill:
   validates_uniqueness_of :bill_id, scope: [:user_id]
 
-  belongs_to :bill
+  belongs_to :bill, inverse_of: :splits
   belongs_to :user
 
 end

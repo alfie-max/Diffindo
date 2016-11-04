@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /*TESTING*/
   window.u1 = {user: {username: "eric", password: "blabla", activated: true}};
-  window.b1 = {bill: {id: 5, title: "3rd bill", amount: 98.76, category_id: 1, author_id: 3, payer_id: 5, date: "Thu, 03 Nov 2016", split_type: "even" }}
+  const split_attrs = [
+    {id: 12, user_id: 2, amount: 100},
+  ];
+  window.b1 = {bill: {id: 11, title: "9th bill", amount: 555.55, category_id: 1, payer_id: 2, date: "Thu, 03 Nov 2016", split_type: "even", splits_attributes: split_attrs }};
   window.invalid_user_1 = {user: {username: "ericc", password: "blabla", activated: true}};
   window.invalid_user_2 = {user: {username: "eric", password: "blabl", activated: true}};
   window.success = (data) => console.log(data);

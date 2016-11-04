@@ -1,14 +1,18 @@
 
 # USERS
-u1 = User.create!(username: "Eric", email: "eric.olivetree@gmail.com", password: "blabla", activated: true)
+u1 = User.create!(username: "Eric O.", email: "eric.olivetree@gmail.com", password: "blabla", activated: true)
 
 u2 = User.create!(username: "Brian", email: "b@b.b", password: "password", activated: true)
 
-guest = User.create!(username: "Meryl Burbank", email: "meryl@burbankgalaxy.com", password: "password", activated: true)
+guest = User.create!(username: "Meryl", email: "meryl@burbankgalaxy.com", password: "password", activated: true)
 
 u4 = User.create!(username: "Ken", email: "k@k.k", password: "password", activated: true)
 
 u5 = User.create!(username: "Robert", email: "r@r.r", password: "password", activated: true)
+
+u6 = User.create!(username: "Mari", email: "m@m.m", password: "password", activated: true)
+
+u7 = User.create!(username: "Mari", email: "m@m.m", password: "password", activated: true)
 
 
 # BILLS
