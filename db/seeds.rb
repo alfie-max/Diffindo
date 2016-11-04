@@ -1,41 +1,63 @@
 
 # USERS
-u1 = User.create!(username: "Eric O.", email: "eric.olivetree@gmail.com", password: "blabla", activated: true)
 
-u2 = User.create!(username: "Brian", email: "b@b.b", password: "password", activated: true)
+users = {}
+for i in (1..10)
+  username = Faker::Name.name
+  email = Faker::Internet.email(username)
+
+  users[i] = User.create!(username: username, email: email, password: "password", activated: true)
+end
 
 guest = User.create!(username: "Meryl", email: "meryl@burbankgalaxy.com", password: "password", activated: true)
 
-u4 = User.create!(username: "Ken", email: "k@k.k", password: "password", activated: true)
-
-u5 = User.create!(username: "Robert", email: "r@r.r", password: "password", activated: true)
-
-u6 = User.create!(username: "Mari", email: "m@m.m", password: "password", activated: true)
-
-u7 = User.create!(username: "Mari", email: "m@m.m", password: "password", activated: true)
-
+users[11] = guest
 
 # BILLS
-b1 = Bill.create!(title: "1st test bill", amount: 33.33, category_id: 1, author_id: 2, payer_id: 3, date: Date.current, split_type: "even")
 
-b2 = Bill.create!(title: "2nd test bill", amount: 66.66, category_id: 1, author_id: 3, payer_id: 5, date: Date.current, split_type: "even")
+TITLES = [
+  "Birthday lunch",
+  "Electrical bill",
+  "Rent",
+  "Gas for SD trip",
+  "new computer!!",
+  "Phone bill",
+  "Comcast",
+  "PGE",
+  "hotel in NY",
+  "Plane tkt for Israel"
+]
 
-b3 = Bill.create!(title: "3rd test bill", amount: 99.99, category_id: 1, author_id: 5, payer_id: 4, date: Date.current, split_type: "even")
+bills = {}
 
-b4 = Bill.create!(title: "4th test bill", amount: 999.99, category_id: 1, author_id: 4, payer_id: 1, date: Date.current, split_type: "even")
+for i in (1..30)
+  title = TITLES[rand(TITLES.length)]
+  amount = Faker::Commerce.price
+  cat_id = 1
+  author_id = users[rand(11)+1].id
+  payer_id = users[rand(11)+1].id
+  date = Faker::Date.between(1.year.ago, Date.today)
+  split_type = "even"
+  splits_attrs = [{user_id: payer_id, amount: amount/2}]
+
+  bills[i] = Bill.create!(title: title, amount: amount, category_id: cat_id, author_id: author_id, payer_id: payer_id, date: date, split_type: split_type, splits_attributes: splits_attrs)
+end
 
 
 # SPLITS
-s1 = Split.create(bill_id: 1, user_id: 3, amount: 33)
 
-s2 = Split.create(bill_id: 1, user_id: 4, amount: 33)
+splits = {}
 
-s3 = Split.create(bill_id: 1, user_id: 5, amount: 33)
+for i in (1..20)
+  bill_id = bills[rand(30)+1].id
+  user_id = users[rand(11)+1].id
+  while user_id == bills[bill_id].payer_id
+    user_id = users[rand(11)+1].id
+  end
 
-s4 = Split.create(bill_id: 2, user_id: 5, amount: 100)
+  amount = bills[bill_id].amount/2
 
-s5 = Split.create(bill_id: 3, user_id: 4, amount:50)
+  puts("Bill ID: #{bill_id}")
 
-s6 = Split.create(bill_id: 3, user_id: 3, amount:50)
-
-s7 = Split.create(bill_id: 4, user_id: 1, amount: 100)
+  splits[i] = Split.create!(user_id: user_id, bill_id: bill_id, amount: amount)
+end
