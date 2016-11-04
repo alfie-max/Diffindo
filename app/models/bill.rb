@@ -31,5 +31,10 @@ class Bill < ActiveRecord::Base
     foreign_key: :payer_id,
     class_name: :User
 
+  has_many :splits, dependent: :destroy
+
+  has_many :split_with,
+    through: :splits,
+    source: :user
 
 end

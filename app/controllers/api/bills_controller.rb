@@ -1,7 +1,8 @@
 class Api::BillsController < ApplicationController
 
     def index
-      @bills = Bill.all
+      #Only bills which the user is involved with should be displayed.
+      @bills = current_user.bills_split
       render "api/bills/index"
     end
 
@@ -9,11 +10,10 @@ class Api::BillsController < ApplicationController
     def show
       @bill = Bill.find(params[:id])
 
-      #YOU'LL HAVE TO CHANGE THIS LOGIC TO ACCOUNT FOR USERS THAT ARE EITHER payers or split_payers OF THE BILL
-      if @bill.author != current_user
-        render json: ["You can not view this bill"], status: 403
-      else
+      if @bill.split_with.include?(current_user)
         render "api/bills/show"
+      else
+        render json: ["You can not view this bill"], status: 403
       end
     end
 
@@ -54,6 +54,7 @@ class Api::BillsController < ApplicationController
       params.require(:bill).permit(:title, :amount, :category_id,
         :payer_id, :date, :doc_url, :split_type)
     end
+
 
 
 end

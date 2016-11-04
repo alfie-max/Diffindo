@@ -28,6 +28,12 @@ class User < ActiveRecord::Base
     foreign_key: :payer_id,
     class_name: :Bill
 
+  has_many :splits
+
+  has_many :bills_split,
+    through: :splits,
+    source: :bill
+
   after_initialize :ensure_session_token
 
   attr_reader :password

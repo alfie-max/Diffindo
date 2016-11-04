@@ -20,6 +20,8 @@ const billsReducer = (state={}, action) => {
       const errors = action.errors;
       return merge({}, state, {errors});
 
+      ADD A CASE FOR LOGOUT TO RESET THE BILLS STATE. DO THAT FOR EVERY MW YOU HAVE!!
+
     default:
       return state;
   }

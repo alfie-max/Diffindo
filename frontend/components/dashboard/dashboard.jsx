@@ -18,10 +18,13 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    
+
   }
 
   render() {
+
+    //FOR CREATING A NEW BILL:
+    //ADD ALL USERS THAT ARE BEING SPLIT WITH + CURRENTUSER + PAYING USER TO AN ARRAY. THEN CALL Split.new WITH EACH OF THOSE USERS
 
     return(
       <div>
