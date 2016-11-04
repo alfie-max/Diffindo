@@ -1,25 +1,32 @@
 ```js
 {
-  currentUser: {
-    id: 1,
-    username: "truman-burbank"
-  },
-  forms: {
-    signUp: {errors: []},
-    logIn: {errors: []},
-    createBill: {errors: ["Description can't be blank"]}
+  session: {
+    currentUser: {
+      id: 1,
+      username: "Truman Burbank",
+      email: "truman@burbankgalaxy.com",
+    },
+    errors: ["Password too short"]
   },
   bills: {
     1: {
       title: "6 pack",
+      author: {
+        id: 1,
+        username: "Truman Burbank"
+      }
       payer_id: 2,
       date: "Jan 8 1998",
       split_type: "percent",
       doc_url: "",
       split_with: {
         1: {
-          username: "truman-burbank",
-          email: "truman@burbankgalaxy.com"
+          user_id: 2,
+          username: "Marlon"
+        },
+        2: {
+          user_id: 1,
+          username: "Truman Burbank"
         }
       },
       category: {
@@ -33,7 +40,8 @@
         1: {
           body: "Golf night on bridge construction site"
         }
-      }
+      },
+      errors: ["Description can't be blank"]
     }
   },
 }
