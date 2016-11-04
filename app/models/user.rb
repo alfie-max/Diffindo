@@ -15,7 +15,7 @@
 class User < ActiveRecord::Base
 
   validates :username, :email, :password_digest, :session_token, :activated, presence: true
-  validates :username, :email, :session_token, uniqueness: true;
+  validates :email, :session_token, uniqueness: true;
   validates :password, length: {minimum: 6, allow_nil: true}
 
   has_many :bills, dependent: :destroy,
@@ -68,4 +68,10 @@ class User < ActiveRecord::Base
   def bcrypt_pwd
     BCrypt::Password.new(self.password_digest)
   end
+
+  def bills_involved_in
+    # For BillsController#index, so we display the bills that a user is involved in (either splitting and/or authored)
+    (self.bills_split + self.bills).uniq
+  end
+
 end
