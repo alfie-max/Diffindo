@@ -11,7 +11,7 @@ const Root = ({store}) => {
   const redirectIfLoggedIn = (nextState, replace) => {
     //We don't want to create a new hashHistory object, but replace the existing one
     const currentUser = store.getState().session.currentUser;
-    // if (currentUser) replace("/");
+    if (currentUser) replace("/");
   }
 
   const handleEnterDashboard = (nextState, replace) => {

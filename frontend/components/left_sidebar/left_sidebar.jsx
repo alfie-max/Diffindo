@@ -9,6 +9,13 @@ class LeftSidebar extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    //So it doesn't try to render currentUser.username and return a console error.
+
+    if (!nextProps.currentUser) return false;
+    return true;
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!nextProps.currentUser) {
       hashHistory.push("/login");
@@ -20,9 +27,6 @@ class LeftSidebar extends React.Component {
   };
 
   render() {
-
-    //So it doesn't try to render currentUser.username and return a console error.
-    if (!this.props.currentUser) return null;
 
     return(
       <div>
