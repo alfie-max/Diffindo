@@ -29,7 +29,7 @@ const SessionReducer = (state = _defaultState, action) => {
       return merge({}, _defaultState, {errors});
 
     case LOGOUT:
-      console.log("Before return from reducer");
+      console.log("Hit RDC LOGOUT");
       return _defaultState;
 
     case CLEAR_ERRORS:
