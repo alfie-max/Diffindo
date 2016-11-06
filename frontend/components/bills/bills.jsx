@@ -9,7 +9,7 @@ class Bills extends React.Component {
   render() {
     console.log(this.props.bills);
     return(
-      <div>
+      <div className="col-md-10 bills-container">
         <ul>
           {this.props.bills.map( bill => (
             <li key={`bill-${bill.id}`}>{bill.title}: {bill.amount}</li>

@@ -32,9 +32,13 @@ class Dashboard extends React.Component {
     //ADD ALL USERS THAT ARE BEING SPLIT WITH + PAYING USER TO AN ARRAY OF OBJS: [{user_id, amount}] PASS THAT ARRAY TO splits_attributes WHEN CALLING Bill#create
 
     return(
-      <div>
-        <LeftSidebarContainer props={this.props}/>
-        <BillsContainer props={this.props}/>
+      <div className="row dashboard">
+        <div className="col-md-2 left-sidebar">
+          <LeftSidebarContainer props={this.props}/>
+        </div>
+        <div className="col-md-10 bills">
+          <BillsContainer props={this.props}/>
+        </div>
       </div>
     );
   }

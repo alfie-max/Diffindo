@@ -1,0 +1,71 @@
+.row {
+  display: block;
+  width: 100%;
+}
+
+.col {
+  display: block;
+  padding: 10px 15px;
+  float: left;
+  box-sizing: border-box;
+}
+
+.col-md-1 {
+  @extend .col;
+  width: 10%;
+}
+
+.col-md-2 {
+  @extend .col;
+  width: 16.6666%;
+}
+
+.col-md-3 {
+  @extend .col;
+  width: 25%;
+}
+
+.col-md-4 {
+  @extend .col;
+  width: 33.3333%;
+}
+
+.col-md-5 {
+  @extend .col;
+  width: 41.6666%;
+}
+
+.col-md-6 {
+  @extend .col;
+  width: 50%;
+}
+
+.col-md-7 {
+  @extend .col;
+  width: 58.3333%;
+}
+
+.col-md-8 {
+  @extend .col;
+  width: 66.6666%;
+}
+
+.col-md-9 {
+  @extend .col;
+  width: 75%;
+}
+
+.col-md-10 {
+  @extend .col;
+  width: 83.3333%;
+}
+
+.col-md-11 {
+  @extend .col;
+  width: 91.6666%;
+}
+
+.col-md-12 {
+  @extend .col;
+  width: 100%;
+}

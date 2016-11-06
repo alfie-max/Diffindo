@@ -1,0 +1,56 @@
+.left-sidebar {
+  height: 100%;
+  background-color: #354050;
+  color: #9fabbd;
+  box-shadow: black 3px 0 3px;
+  padding: 0 0 20px;
+  cursor: default;
+}
+
+.user-greeting {
+  text-align: center;
+}
+
+.user-greeting .amount .green {
+  color: #2ecc71;
+}
+
+.user-greeting img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin: 20px auto 10px;
+}
+
+.section-split {
+  border-top: 3px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 10px 0;
+}
+
+.left-sidebar section p, .left-sidebar button, .left-sidebar ul {
+  padding: 15px 25px;
+  width: 100%;
+  -webkit-transition: border 100ms, background-color 100ms, color 100ms;
+}
+
+.left-sidebar section p:hover, .left-sidebar button:hover {
+  background-color: rgba(255,255,255,0.2);
+  border-left: solid 5px #3498db;
+  color: #ecf0f1;
+  cursor: pointer;
+  -webkit-transition: border 100ms, background-color 100ms, color 100ms;
+
+}
+
+.left-sidebar i {
+  margin-right: 15px;
+}
+
+.left-sidebar ul {
+  padding: 0 25px;
+}
+
+.left-sidebar li {
+  margin: 5px 0;
+}
