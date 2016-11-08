@@ -1,5 +1,6 @@
 .left-sidebar {
   height: 100%;
+  min-height: 100vh;
   background-color: #354050;
   color: #9fabbd;
   box-shadow: black 3px 0 3px;
@@ -20,6 +21,7 @@
   height: 100px;
   border-radius: 50px;
   margin: 20px auto 10px;
+  box-shadow: black 0px 1px 3px;
 }
 
 .section-split {

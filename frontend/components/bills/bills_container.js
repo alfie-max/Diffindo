@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
-import { selectAllBills } from '../../reducers/selectors';
+import { selectAllBillsGroupedByMonth } from '../../reducers/selectors';
 import Bills from './bills';
 
 const mapStateToProps = ({bills}) => ({
-  bills: selectAllBills(bills)
+  monthHeaders: selectAllBillsGroupedByMonth(bills)[0],
+  bills: selectAllBillsGroupedByMonth(bills)[1]
 });
 
 const mapDispatchToProps = (dispatch) => ({

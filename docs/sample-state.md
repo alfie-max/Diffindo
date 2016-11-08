@@ -9,40 +9,42 @@
     errors: ["Password too short"]
   },
   bills: {
-    1: {
-      title: "6 pack",
-      author: {
-        id: 1,
-        username: "Truman Burbank"
-      }
-      payer_id: 2,
-      date: "Jan 8 1998",
-      split_type: "percent",
-      doc_url: "",
-      split_with: {
-        1: {
-          user_id: 2,
-          username: "Marlon"
-        },
-        2: {
-          user_id: 1,
+    "May 2016": {
+      13: {
+        title: "6 pack",
+        author: {
+          id: 1,
           username: "Truman Burbank"
         }
-      },
-      category: {
-        1: {
-          id: 14,
-          name: "Liquor",
-          parent_id: 1
+        payer_id: 2,
+        date: "Jan 8 1998",
+        split_type: "percent",
+        doc_url: "",
+        split_with: {
+          1: {
+            user_id: 2,
+            username: "Marlon"
+          },
+          2: {
+            user_id: 1,
+            username: "Truman Burbank"
+          }
+        },
+        category: {
+          1: {
+            id: 14,
+            name: "Liquor",
+            parent_id: 1
+          }
+        }
+        comments: {
+          1: {
+            body: "Golf night on bridge construction site"
+          }
         }
       }
-      comments: {
-        1: {
-          body: "Golf night on bridge construction site"
-        }
-      },
-      errors: ["Description can't be blank"]
-    }
+    },
+    errors: ["Description can't be blank"]
   },
 }
 ```

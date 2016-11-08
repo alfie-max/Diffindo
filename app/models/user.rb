@@ -71,7 +71,10 @@ class User < ActiveRecord::Base
 
   def bills_involved_in
     # For BillsController#index, so we display the bills that a user is involved in (either splitting and/or authored)
-    (self.bills_split + self.bills).uniq
+    # Default join is INNER JOIN, which only returns the bills that a user has authored AND is splitting. Ruby 4.x doesn't provide left_outer_joins, so it has to be written manually
+    Bill.joins('LEFT OUTER JOIN splits ON splits.bill_id = bills.id')
+    .where("splits.user_id = ? OR author_id = ?", self.id, self.id)
+    .order(:date)
   end
 
 end

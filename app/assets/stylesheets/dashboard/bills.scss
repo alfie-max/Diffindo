@@ -1,5 +1,28 @@
 .bills-container {
   padding: 0;
-  float: none;
-  margin: 0 auto;
+}
+
+.month-group {
+  width: 100%;
+}
+
+.month-header {
+  width: 100%;
+  background-color: #354050;
+  color: #ecf0f1;
+  border-top: solid white 1px;
+  border-bottom: solid black 1px;
+}
+
+.bills-list {
+
+}
+
+.bill-item {
+  border-bottom: solid 1px #eee;
+  padding: 30px;
+}
+
+.bill-item:hover {
+  background-color: #eee;
 }

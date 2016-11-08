@@ -1,0 +1,17 @@
+.dashboard-top-bar {
+  background-color: #354050;
+  color: #9fabbd;
+  padding: 0;
+  float: none;
+  margin: 0 auto;
+  padding: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid black 1px;
+}
+
+.main-view {
+  height: 100vh;
+  overflow: scroll;
+}

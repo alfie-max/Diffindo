@@ -25,7 +25,8 @@ TITLES = [
   "Comcast",
   "PGE",
   "hotel in NY",
-  "Plane tkt for Israel"
+  "Plane tkt for Israel",
+  "brunch @ Hobee's"
 ]
 
 bills = {}

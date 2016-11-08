@@ -14,8 +14,27 @@
  *= require_self
  */
 
-@import "shared/reset";
-@import "shared/grid";
-@import "session_form";
-@import "dashboard/left_sidebar";
-@import "dashboard/bills"
+ @import "shared/reset";
+ @import "shared/grid";
+ @import "session_form";
+ @import "dashboard/dashboard";
+ @import "dashboard/left_sidebar";
+ @import "dashboard/top_bar";
+ @import "dashboard/transactions";
+ @import "dashboard/bills";
+
+
+.button-green {
+  background-color: #27ae60;
+  color: #ecf0f1;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  -webkit-transition: background-color 200ms;
+}
+
+.button-green:hover {
+  background-color: #2ecc71;
+  -webkit-transition: background-color 200ms;
+}

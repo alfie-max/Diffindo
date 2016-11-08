@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router';
 import LeftSidebarContainer from '../left_sidebar/left_sidebar_container';
-import BillsContainer from '../bills/bills_container';
+import TopBarContainer from '../top_bar/top_bar_container';
+import TransactionsContainer from '../transactions/transactions_container';
 
 class Dashboard extends React.Component {
 
@@ -11,33 +12,27 @@ class Dashboard extends React.Component {
     this.renderDashboard = true;
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps");
-    console.log(nextProps);
-    if (!nextProps.currentUser) this.renderDashboard = false;
-  }
-
 
   render() {
 
-    console.log("Begin render DB");
-
-    if (!this.renderDashboard) {
-      this.props.router.push("/login");
-      return
-    }
-
-    console.log("Should render DB");
     //FOR CREATING A NEW BILL:
     //ADD ALL USERS THAT ARE BEING SPLIT WITH + PAYING USER TO AN ARRAY OF OBJS: [{user_id, amount}] PASS THAT ARRAY TO splits_attributes WHEN CALLING Bill#create
 
     return(
-      <div className="row dashboard">
+      <div className="row dashboard clearfix">
         <div className="col-md-2 left-sidebar">
           <LeftSidebarContainer props={this.props}/>
         </div>
-        <div className="col-md-10 bills">
-          <BillsContainer props={this.props}/>
+
+        <div className="col-md-10 main-view">
+          <div className="row">
+            <TopBarContainer />
+          </div>
+
+          <div className="row transactions">
+            <TransactionsContainer props={this.props}/>
+          </div>
+
         </div>
       </div>
     );
