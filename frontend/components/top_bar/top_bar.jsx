@@ -42,10 +42,16 @@ class TopBar extends React.Component {
 
         <Modal
           isOpen={this.state.modalOpen}
-          onRequestClose={this.closeModal}>
+          onRequestClose={this.closeModal}
+          overlayClassName="bill-modal-overlay"
+          className="bill-modal">
+
+          <div className="modal-title">
+            <h3>Add a bill</h3>
+            <i className="fa fa-times" aria-hidden="true" onClick={this.closeModal}></i>
+          </div>
 
           <BillsModalContainer />
-          <button onClick={this.closeModal}>Close</button>
 
         </Modal>
 

@@ -11,9 +11,21 @@ class BillsModal extends React.Component {
 
     return (
     <div>
-        <h2>Im a modal!</h2>
-        <p>modal modal modal modal modal</p>
-        <p>mooooooooodal!</p>
+        <div className="modal-body">
+          <div className="modal-form">
+            
+            <input type="text" className="title"
+              placeholder="Enter a description"/>
+
+            <input type="number" min="0" className="amount"
+              placeholder="0.00"/>
+
+          </div>
+          <div className="modal-actions">
+            <button className="button-gray">Cancel</button>
+            <button className="button-green">Save</button>
+          </div>
+        </div>
     </div>
   )}
 }

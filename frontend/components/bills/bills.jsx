@@ -14,7 +14,7 @@ class Bills extends React.Component {
 
             <section key={`monthGroup-${monthHeader}`} className="month-group">
               <div className="month-header">
-                <h2>{monthHeader}</h2>
+                {monthHeader}
               </div>
 
               <ul className="bills-list">
@@ -26,7 +26,9 @@ class Bills extends React.Component {
                       <span className="bill-day row">{bill.day}</span>
                     </div>
 
-                    <div className="bill-title col-md-3">{bill.title}</div>
+                    <div className="bill-title col-md-3">
+                      <h2>{bill.title}</h2>
+                    </div>
 
                     <div className="bill-paid-by col-md-3">
                       <span className="bill-payer row">
