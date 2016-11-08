@@ -19,8 +19,31 @@ class Bills extends React.Component {
 
               <ul className="bills-list">
                 {this.props.bills[idx].map( bill => (
-                  <li key={`bill-${bill.id}`} className="bill-item">
-                    {bill.title}: {bill.amount}
+                  <li key={`bill-${bill.id}`} className="bill-item row clearfix">
+
+                    <div className="bill-date col-md-1">
+                      <span className="bill-month row">{bill.month}</span>
+                      <span className="bill-day row">{bill.day}</span>
+                    </div>
+
+                    <div className="bill-title col-md-3">{bill.title}</div>
+
+                    <div className="bill-paid-by col-md-3">
+                      <span className="bill-payer row">
+                        {bill.payer} paid
+                      </span>
+                      <span className="paid-amount row">
+                        ${bill.amount}
+                      </span>
+                    </div>
+
+                    <div className="col-md-3"></div>
+
+                    <div className="bill-actions col-md-2">
+                      <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      <i className="fa fa-trash-o" aria-hidden="true"></i>
+                    </div>
+
                   </li>
                 ))}
               </ul>

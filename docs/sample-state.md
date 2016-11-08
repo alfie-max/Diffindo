@@ -17,7 +17,8 @@
           username: "Truman Burbank"
         }
         payer_id: 2,
-        date: "Jan 8 1998",
+        month: "Jan",
+        day: "08",
         split_type: "percent",
         doc_url: "",
         split_with: {

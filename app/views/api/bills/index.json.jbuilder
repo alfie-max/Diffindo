@@ -3,7 +3,10 @@
 @bills.each do |bill|
   json.set! bill.date.strftime('%B %Y') do
     json.set! bill.id do
-      json.extract! bill, :id, :author_id, :title, :amount, :date
+      json.extract! bill, :id, :author_id, :title, :amount
+      json.payer bill.payer.username
+      json.month bill.date.strftime('%^b')
+      json.day bill.date.strftime('%d')
     end
   end
 end
