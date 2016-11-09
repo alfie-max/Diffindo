@@ -5,7 +5,6 @@ import {
   } from '../../actions/bills_actions';
 
 const mapStateToProps = (state, {billForm}) => {
-  console.log(state);
   return {
     currentUser: state.session.currentUser,
     billDetail: state.billDetail,

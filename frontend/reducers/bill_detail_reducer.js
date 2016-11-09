@@ -13,7 +13,8 @@ const _defaultState = {
   payer_id: "",
   date: "",
   docUrl: "",
-  split_type: ""
+  split_type: "",
+  splits_attributes: []
 }
 
 const BillDetailReducer = (state=_defaultState, action) => {

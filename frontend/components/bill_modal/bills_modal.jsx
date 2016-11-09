@@ -14,7 +14,7 @@ class BillsModal extends React.Component {
       date: "",
       docUrl: "",
       split_type: "even",
-      splits: [],
+      splits_attributes: [],
       splitAmount: 0
     }
 
@@ -30,6 +30,7 @@ class BillsModal extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.billForm.modalAction == "edit") {
+      // console.log("New props are ", newProps);
       this.setState(newProps.billDetail);
     }
   }
@@ -47,19 +48,23 @@ class BillsModal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let bill = this.state;
-    // bill.splits = prepareSplitsArray();
-    // const payerSplit = {user_id: bill.payer_id, amount: bill.amount}
-    // bill.split.push([this.state.payer_id])
-    this.props.processForm({bill});
+    // bill.splits_attributes = this.prepareSplitsArray(bill);
+    // this.props.processForm({bill});
     this.props.closeModal();
   }
 
-  prepareSplitsArray() {
+  prepareSplitsArray(bill) {
     // Should add payer_id to split array.
-    // Then add splitAmount to all users on splits array.
+    bill.splits_attributes = bill.splits_attributes.concat(
+      {user_id: bill.payer_id, amount: 0}
+    );
 
-    bill.splits.concat({id: bill.payer_id});
-    // bill.splits
+    // Then add splitAmount to all users on splits array.
+    bill.splits_attributes.forEach( split => {
+      split.amount = bill.splitAmount;
+    })
+
+    return bill.splits_attributes
   }
 
   renderErrors() {
@@ -72,14 +77,12 @@ class BillsModal extends React.Component {
     )
   }
 
-  handleAddSplit(splits, splitAmount) {
-    this.setState({splits, splitAmount});
+  handleAddSplit(splits_attributes, splitAmount) {
+    this.setState({splits_attributes, splitAmount});
   };
 
 
   render() {
-
-    console.log("Current state", this.state);
 
     return (
     <div>

@@ -5,16 +5,16 @@ export default class SplitWith extends React.Component {
   constructor(props) {
     super(props);
 
-    // splits has all friends objects that are currently splitting.
-    // splits is passed up to bill_modals so it can add to its state,
-    // which will be submitted as a new/updated bill
+    // splits_attributes has all friends objects that are currently
+    // splitting and is passed up to bill_modals so it can add to its
+    // state, which will be submitted as a new/updated bill
 
-    // splitsNames is an array os friends username,
-    // to make the logic easier for maitaining the split list
+    // splitsNames is an array of friends username,
+    // to make the logic easier for maitaining the splits_attributes list
     this.state = {
       inputVal: '',
       splitsNames: [],
-      splits: [],
+      splits_attributes: [],
     };
 
     this.splitAmount = 0;
@@ -27,13 +27,21 @@ export default class SplitWith extends React.Component {
     this.matches = this.matches.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    // When the receiveSingleBill API call returns on bills_modal, it will
+    // send in the splits_attributes. We need to update our state with them
+    this.setState(
+      {splits_attributes: newProps.billDetail.splits_attributes}
+    );
+  }
+
   componentDidUpdate() {
     // Keeps this.splitAmount always up to date, which is then used when
     // making the splits array
     this.updateSplitAmount();
 
     //Pass the splits array to bill_modal
-    this.props.handleAddSplit(this.state.splits, this.splitAmount);
+    this.props.handleAddSplit(this.state.splits_attributes, this.splitAmount);
   }
 
   updateSplitAmount() {
@@ -42,7 +50,7 @@ export default class SplitWith extends React.Component {
 
     // When we submit, we'll add payer_id to the splits array.
     // For now, we compensate by adding 1 to the numberOfSplits.
-    const numberOfSplits = this.state.splits.length + 1;
+    const numberOfSplits = this.state.splits_attributes.length + 1;
     const billAmount = this.props.billAmount;
     if (billAmount > 0) {
       this.splitAmount = billAmount/numberOfSplits;
@@ -106,9 +114,13 @@ export default class SplitWith extends React.Component {
     // Prepping the splits objs array. On bills_modal#submit, the payer_id,
     // as well as the split amounts for all splits, will be added
     const friend = this.props.userFriends[name];
-    const newSplits = this.state.splits.concat({id: friend.id});
+    const newSplits = this.state.splits_attributes.concat(
+      {user_id: friend.id, amount: 0}
+    );
 
-    this.setState({splitsNames: newSplitsNames, splits: newSplits});
+    this.setState(
+      {splitsNames: newSplitsNames, splits_attributes: newSplits}
+    );
 
   }
 
@@ -117,15 +129,16 @@ export default class SplitWith extends React.Component {
       let newSplitsNames = this.state.splitsNames;
       newSplitsNames.splice(idx, 1);
 
-      let newSplits = this.state.splits;
+      let newSplits = this.state.splits_attributes;
       newSplits.splice(idx, 1);
 
-      this.setState({splitsNames: newSplitsNames, splits: newSplits});
+      this.setState(
+        {splitsNames: newSplitsNames, splits_attributes: newSplits}
+      );
     }
   }
 
   render() {
-
 
     let results = this.matches().map((result, i) => {
       return (
