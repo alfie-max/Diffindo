@@ -14,15 +14,15 @@
  *= require_self
  */
 
- @import "shared/reset";
- @import "shared/grid";
- @import "session_form";
- @import "dashboard/dashboard";
- @import "dashboard/left_sidebar";
- @import "dashboard/top_bar";
- @import "dashboard/transactions";
- @import "dashboard/bills";
- @import "dashboard/bill_modal";
+ @import "./shared/reset";
+ @import "./shared/grid";
+ @import "./session_form";
+ @import "./dashboard/dashboard";
+ @import "./dashboard/left_sidebar";
+ @import "./dashboard/top_bar";
+ @import "./dashboard/transactions";
+ @import "./dashboard/bills";
+ @import "./dashboard/bill_modal";
 
 
 .button-green {
