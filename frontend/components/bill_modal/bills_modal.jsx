@@ -1,4 +1,5 @@
 import React from 'react';
+import SplitWithContainer from './split_with/split_with_container';
 
 class BillsModal extends React.Component {
 
@@ -62,11 +63,13 @@ class BillsModal extends React.Component {
     return (
     <div>
         <div className="main-modal">
+
+          <div className="split-with">
+            <SplitWithContainer />
+          </div>
+          
           <div className="modal-form clearfix">
 
-            <div className="split-with">
-
-            </div>
 
             <div className="category">
               <i className="fa fa-money" aria-hidden="true"></i>

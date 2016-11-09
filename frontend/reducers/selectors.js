@@ -16,3 +16,14 @@ export const selectAllBillsGroupedByMonth = bills => {
 
   return [keys(bills), allBills]
 };
+
+
+export const mapFriendNameToFriendObj = friends => {
+   //keys are the names and vals are the obj themselves
+   console.log("Friends are ",friends.keys);
+   let result = [];
+   friends.keys.forEach( friend => {
+     result.push([friend, friends[friend]])
+   })
+   return result;
+}

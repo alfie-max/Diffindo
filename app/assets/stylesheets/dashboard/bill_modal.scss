@@ -43,6 +43,30 @@
   border-right: dashed 1px #ddd;
 }
 
+.split-with {
+  border-bottom: solid 1px #ddd;
+  padding: 10px 5px;
+}
+
+.friends-list {
+  position: absolute;
+  background: white;
+  box-shadow: 0 2px 5px #888;
+  left: 0;
+  right: 0;
+  top: 87px;
+}
+
+.friends-list li {
+  padding: 5px 20px;
+}
+
+.friends-list li:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+
 .modal-form {
   border-bottom: solid 1px #eee;
   padding: 10px 20px;
@@ -105,4 +129,8 @@
   border-radius: 10px;
   text-align: center;
   padding-left: 40px;
+}
+
+.hide-friends-list {
+  display: none;
 }
