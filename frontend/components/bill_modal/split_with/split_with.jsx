@@ -14,12 +14,14 @@ export default class SplitWith extends React.Component {
     this.state = {
       inputVal: '',
       splitsNames: [],
-      splits: []
+      splits: [],
     };
+
+    this.splitAmount = 0;
 
     this.renderFriendsList = false;
 
-    this.selectName = this.selectName.bind(this);
+    this.addSplit = this.addSplit.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.userFriends = this.props.userFriends;
     this.matches = this.matches.bind(this);
@@ -57,17 +59,25 @@ export default class SplitWith extends React.Component {
     return matches;
   }
 
-  selectName(event) {
+  addSplit(event) {
     const name = event.currentTarget.innerText;
     this.setState({splitsNames: this.state.splitsNames.concat(name)});
 
+    CHANGE HERE AND REMOVESPLIT TO MAKE AN ARRAY OF OBJS: {user_id: 99, amount: 99.99}
+
     const friend = this.props.userFriends[name];
-    this.setState({splits: this.state.splits.concat(friend)});
+    const newSplits = this.state.splits.concat(friend);
+    this.setState({splits: newSplits});
+
+    this.updateSplitAmount(newSplits);
+
+    //Pass the splits array to bill_modal
+    this.props.handleAddSplit(newSplits);
+
   }
 
   removeSplit(idx) {
     return e => {
-      console.log(`removing ${idx}`);
       let newSplitsNames = this.state.splitsNames;
       newSplitsNames.splice(idx, 1);
       this.setState({splitsNames: newSplitsNames});
@@ -75,17 +85,42 @@ export default class SplitWith extends React.Component {
       let newSplits = this.state.splits;
       newSplits.splice(idx, 1);
       this.setState({splits: newSplits});
+
+      this.updateSplitAmount(newSplits);
+
+      //Pass the splits array to bill_modal
+      this.props.handleAddSplit(newSplits);
+
     }
   }
 
+  updateSplitAmount() {
+    //setState is async, so we pass in splits from either
+    // addSplit or removeSplit so we can aupdate the splitAmount.
+
+    // When we submit, we'll add payer_id to the splits array.
+    // For now, we compensate by adding 1 to the numberOfSplits.
+    const numberOfSplits = this.state.splits.length + 1;
+    const billAmount = this.props.billAmount;
+    if (billAmount > 0) {
+      this.splitAmount = billAmount/numberOfSplits;
+    }
+  };
+
   render() {
+
+
     let results = this.matches().map((result, i) => {
       return (
-        <li key={i} onClick={this.selectName}>{result}</li>
+        <li key={i} onClick={this.addSplit}>{result}</li>
       );
     });
 
-    console.log("Splits is ", this.state.splits);
+    // Keeps this.splitAmount always up to date, which is then used when
+    // making the splits array
+    this.updateSplitAmount();
+
+    console.log(this.state, this.splitAmount);
 
     let splitsList = this.state.splitsNames.map( (friend, idx) => {
       return (

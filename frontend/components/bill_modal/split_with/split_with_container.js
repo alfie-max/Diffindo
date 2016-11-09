@@ -3,10 +3,12 @@ import SplitWith from './split_with';
 import { mapFriendNameToFriendObj } from '../../../reducers/selectors';
 
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, {handleAddSplit, billAmount}) => {
   return {
     userFriends: state.session.currentUser.friends,
-    billDetail: state.billDetail
+    billDetail: state.billDetail,
+    billAmount,
+    handleAddSplit
   }
 };
 

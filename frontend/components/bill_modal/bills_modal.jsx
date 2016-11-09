@@ -13,10 +13,13 @@ class BillsModal extends React.Component {
       payer_id: this.props.currentUser.id,
       date: "",
       docUrl: "",
-      split_type: "even"
+      split_type: "even",
+      splits: [],
+      splitAmount: 0
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAddSplit = this.handleAddSplit.bind(this);
   }
 
   componentWillMount() {
@@ -43,7 +46,9 @@ class BillsModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const bill = this.state;
+    let bill = this.state;
+    const payerSplit = {user_id: bill.payer_id, amount: bill.amount}
+    bill.split.push([this.state.payer_id])
     this.props.processForm({bill});
     this.props.closeModal();
   }
@@ -58,16 +63,25 @@ class BillsModal extends React.Component {
     )
   }
 
+  handleAddSplit(splits) {
+    this.setState({splits: splits});
+  };
+
 
   render() {
+
+    // console.log("Current state", this.state);
+
     return (
     <div>
         <div className="main-modal">
 
           <div className="split-with">
-            <SplitWithContainer />
+            <SplitWithContainer
+              handleAddSplit={this.handleAddSplit}
+              billAmount={this.state.amount}/>
           </div>
-          
+
           <div className="modal-form clearfix">
 
 
