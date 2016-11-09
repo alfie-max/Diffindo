@@ -27,71 +27,13 @@ export default class SplitWith extends React.Component {
     this.matches = this.matches.bind(this);
   }
 
-  handleInput(event) {
-    if (event.currentTarget.value.length > 0) {
-      this.renderFriendsList = true;
-    } else {
-      this.renderFriendsList = false;
-    }
-    this.setState({inputVal: event.currentTarget.value});
-  }
-
-  matches() {
-    const matches = [];
-    // if (this.state.inputVal.length === 0) {
-    //   return this.props.names;
-    // }
-
-    keys(this.props.userFriends).forEach( friendName => {
-      let sub = friendName.slice(0, this.state.inputVal.length);
-      // Only display the friend if they match the query
-      // and have not been added to the splits list yet.
-      if (sub.toLowerCase() === this.state.inputVal.toLowerCase() &&
-        !this.state.splitsNames.includes(friendName) ) {
-        matches.push(friendName);
-      }
-    });
-
-    if (matches.length === 0) {
-      matches.push('No matches');
-    }
-
-    return matches;
-  }
-
-  addSplit(event) {
-    const name = event.currentTarget.innerText;
-    this.setState({splitsNames: this.state.splitsNames.concat(name)});
-
-    CHANGE HERE AND REMOVESPLIT TO MAKE AN ARRAY OF OBJS: {user_id: 99, amount: 99.99}
-
-    const friend = this.props.userFriends[name];
-    const newSplits = this.state.splits.concat(friend);
-    this.setState({splits: newSplits});
-
-    this.updateSplitAmount(newSplits);
+  componentDidUpdate() {
+    // Keeps this.splitAmount always up to date, which is then used when
+    // making the splits array
+    this.updateSplitAmount();
 
     //Pass the splits array to bill_modal
-    this.props.handleAddSplit(newSplits);
-
-  }
-
-  removeSplit(idx) {
-    return e => {
-      let newSplitsNames = this.state.splitsNames;
-      newSplitsNames.splice(idx, 1);
-      this.setState({splitsNames: newSplitsNames});
-
-      let newSplits = this.state.splits;
-      newSplits.splice(idx, 1);
-      this.setState({splits: newSplits});
-
-      this.updateSplitAmount(newSplits);
-
-      //Pass the splits array to bill_modal
-      this.props.handleAddSplit(newSplits);
-
-    }
+    this.props.handleAddSplit(this.state.splits, this.splitAmount);
   }
 
   updateSplitAmount() {
@@ -107,6 +49,81 @@ export default class SplitWith extends React.Component {
     }
   };
 
+
+  handleInput(event) {
+    if (event.currentTarget.value.length > 0) {
+      this.renderFriendsList = true;
+    } else {
+      this.renderFriendsList = false;
+    }
+    this.setState({inputVal: event.currentTarget.value});
+  }
+
+  matches() {
+    const matches = [];
+    // if (this.state.inputVal.length === 0) {
+    //   return this.props.names;
+    // }
+
+    const shouldDisplayName = friendName => {
+      //Returns true if friendName:
+      // • is not currentUser (self);
+      // • matches the query string;
+      // • hasn't been added to the list to be displayed
+      let sub = friendName.slice(0, this.state.inputVal.length);
+
+      const friendId = this.props.userFriends[friendName].id;
+      const queryString = this.state.inputVal.toLowerCase();
+      const namesOnList = this.state.splitsNames;
+
+      return (
+        friendId != this.props.currentUser.id &&
+        sub.toLowerCase() === queryString &&
+        !namesOnList.includes(friendName)
+      )
+    }
+
+    keys(this.props.userFriends).forEach( friendName => {
+      // Only display the friend if they match the query
+      // and have not been added to the splits list yet.
+      if (shouldDisplayName(friendName)) {
+        matches.push(friendName);
+      }
+    });
+
+    if (matches.length === 0) {
+      matches.push('No matches');
+    }
+
+    return matches;
+  }
+
+  addSplit(event) {
+    // Prepping the displayed names array
+    const name = event.currentTarget.innerText;
+    const newSplitsNames = this.state.splitsNames.concat(name);
+
+    // Prepping the splits objs array. On bills_modal#submit, the payer_id,
+    // as well as the split amounts for all splits, will be added
+    const friend = this.props.userFriends[name];
+    const newSplits = this.state.splits.concat({id: friend.id});
+
+    this.setState({splitsNames: newSplitsNames, splits: newSplits});
+
+  }
+
+  removeSplit(idx) {
+    return e => {
+      let newSplitsNames = this.state.splitsNames;
+      newSplitsNames.splice(idx, 1);
+
+      let newSplits = this.state.splits;
+      newSplits.splice(idx, 1);
+
+      this.setState({splitsNames: newSplitsNames, splits: newSplits});
+    }
+  }
+
   render() {
 
 
@@ -115,12 +132,6 @@ export default class SplitWith extends React.Component {
         <li key={i} onClick={this.addSplit}>{result}</li>
       );
     });
-
-    // Keeps this.splitAmount always up to date, which is then used when
-    // making the splits array
-    this.updateSplitAmount();
-
-    console.log(this.state, this.splitAmount);
 
     let splitsList = this.state.splitsNames.map( (friend, idx) => {
       return (

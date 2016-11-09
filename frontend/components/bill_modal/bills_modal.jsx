@@ -47,10 +47,19 @@ class BillsModal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let bill = this.state;
-    const payerSplit = {user_id: bill.payer_id, amount: bill.amount}
-    bill.split.push([this.state.payer_id])
+    // bill.splits = prepareSplitsArray();
+    // const payerSplit = {user_id: bill.payer_id, amount: bill.amount}
+    // bill.split.push([this.state.payer_id])
     this.props.processForm({bill});
     this.props.closeModal();
+  }
+
+  prepareSplitsArray() {
+    // Should add payer_id to split array.
+    // Then add splitAmount to all users on splits array.
+
+    bill.splits.concat({id: bill.payer_id});
+    // bill.splits
   }
 
   renderErrors() {
@@ -63,14 +72,14 @@ class BillsModal extends React.Component {
     )
   }
 
-  handleAddSplit(splits) {
-    this.setState({splits: splits});
+  handleAddSplit(splits, splitAmount) {
+    this.setState({splits, splitAmount});
   };
 
 
   render() {
 
-    // console.log("Current state", this.state);
+    console.log("Current state", this.state);
 
     return (
     <div>
@@ -105,6 +114,7 @@ class BillsModal extends React.Component {
 
             <div className="payment-info">
               <p>Paid by <span>you</span> and split equally</p>
+              <p>(${this.state.splitAmount} / person)</p>
             </div>
 
             <div className="date">
