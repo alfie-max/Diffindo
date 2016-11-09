@@ -25,7 +25,7 @@ const billsMiddleware = ({ dispatch }) => next => action => {
 
   const receiveAllBillsSuccess = (data) => dispatch(receiveAllBills(data));
   const receiveSingleBillSuccess = (data) => dispatch(receiveSingleBill(data));
-  const getBillsErrors = (error) => dispatch(receiveBillsErrors(error);
+  const getBillsErrors = (error) => dispatch(receiveBillsErrors(error));
   const updateBillsState = () => dispatch(requestAllBills());
 
   switch (action.type) {
