@@ -34,7 +34,10 @@ export default class SplitWith extends React.Component {
 
     keys(this.props.userFriends).forEach( friendName => {
       let sub = friendName.slice(0, this.state.inputVal.length);
-      if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
+      // Only display the friend if they match the query
+      // and have not been added to the splits list yet.
+      if (sub.toLowerCase() === this.state.inputVal.toLowerCase() &&
+        !this.state.splits.includes(friendName) ) {
         matches.push(friendName);
       }
     });
@@ -48,7 +51,16 @@ export default class SplitWith extends React.Component {
 
   selectName(event) {
     let name = event.currentTarget.innerText;
-    this.setState({inputVal: name});
+    this.setState({splits: this.state.splits.concat(name)});
+  }
+
+  removeSplit(idx) {
+    return e => {
+      console.log(`removing ${idx}`);
+      let newSplits = this.state.splits;
+      newSplits.splice(idx, 1);
+      this.setState({splits: newSplits});
+    }
   }
 
   render() {
@@ -57,18 +69,40 @@ export default class SplitWith extends React.Component {
         <li key={i} onClick={this.selectName}>{result}</li>
       );
     });
+
+    console.log(this.state.splits);
+
+    let splitsList = this.state.splits.map( (friend, idx) => {
+      return (
+        <li key={`split-${idx}`}>
+          <i className="fa fa-times" aria-hidden="true"
+            onClick={this.removeSplit(idx)}/>{friend}
+        </li>
+      );
+    });
+
     return(
       <div>
-        <div className='friends-search'>
+
+        <ul className="splits-list clearfix">
+          { splitsList }
+        </ul>
+
+        <div className="splits-with-form">
           <input
             onChange={this.handleInput}
             value={this.state.inputVal}
-            placeholder='Split with...'/>
+            placeholder='Split with...'
+            className="split-with-input"/>
+
           <ul className=
             { this.renderFriendsList ? "friends-list" : "hide-friends-list" }>
-              {results}
+            {results}
           </ul>
+
+
         </div>
+
       </div>
     );
   }

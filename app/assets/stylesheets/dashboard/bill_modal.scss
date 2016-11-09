@@ -48,13 +48,39 @@
   padding: 10px 5px;
 }
 
+.splits-with-form {
+  position: relative;
+}
+
+.splits-list {
+  margin-bottom: 5px;
+}
+
+.splits-list i {
+  color: #e74c3c;
+  margin-right: 5px;
+}
+
+.splits-list i:hover {
+  cursor: pointer;
+}
+
+.splits-list li {
+  float: left;
+  padding: 5px 10px;
+  border: solid 1px #ddd;
+  margin: 5px;
+  border-radius: 55px;
+  font-size: 12px;
+}
+
 .friends-list {
   position: absolute;
   background: white;
   box-shadow: 0 2px 5px #888;
   left: 0;
   right: 0;
-  top: 87px;
+  top: 30px;
 }
 
 .friends-list li {
