@@ -24,7 +24,7 @@ class Api::BillsController < ApplicationController
     def create
       @bill = Bill.new(bill_params)
       @bill.author_id = current_user.id
-      if @bill.save!
+      if @bill.save
         render "api/bills/show"
       else
         render json: @bill.errors.full_messages, status: 422
