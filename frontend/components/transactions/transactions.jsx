@@ -10,7 +10,7 @@ class Transactions extends React.Component {
   render() {
     return(
       <div className="col-md-7 dashboard-container clearfix">
-        <BillsContainer />
+        <BillsContainer openModal={this.props.openModal}/>
       </div>
     );
   }

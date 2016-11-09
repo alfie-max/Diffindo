@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
 import SessionReducer from './session_reducer';
 import BillsReducer from './bills_reducer';
+import BillDetailReducer from './bill_detail_reducer';
+import FormsErrorsReducer from './forms_errors_reducer';
 import { LOGOUT } from '../actions/session_actions'
 
 const AppReducer = combineReducers({
   session: SessionReducer,
-  bills: BillsReducer
+  bills: BillsReducer,
+  billDetail: BillDetailReducer,
+  formsErrors: FormsErrorsReducer
 });
 
 

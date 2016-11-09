@@ -13,7 +13,7 @@ class Api::BillsController < ApplicationController
     def show
       @bill = Bill.find(params[:id])
 
-      if @bill.split_with.include?(current_user)
+      if current_user.bills_involved_in.include?(@bill)
         render "api/bills/show"
       else
         render json: ["You can not view this bill"], status: 403

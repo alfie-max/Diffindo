@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import TopBar from './top_bar';
 
-const mapStateToProps = (ownProps) => {
+const mapStateToProps = (state, {openModal}) => {
   // const pageTitle = ownProps.location.pathname.slice(1);
-
   return {
+    openModal,
     title: "All Bills"
   }
 };

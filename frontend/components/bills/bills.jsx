@@ -4,6 +4,21 @@ class Bills extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.openModal = this.openModal.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  openModal (id) {
+    return e => {
+      this.props.openModal(true, "edit", id);
+    }
+  }
+
+  handleDelete(id) {
+    return e => {
+      this.props.deleteBill(id);
+    }
   }
 
   render() {
@@ -42,8 +57,10 @@ class Bills extends React.Component {
                     <div className="col-md-3"></div>
 
                     <div className="bill-actions col-md-2">
-                      <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                      <i className="fa fa-trash-o" aria-hidden="true"></i>
+                      <i className="fa fa-pencil-square-o"
+                        aria-hidden="true" onClick={this.openModal(bill.id)}/>
+                      <i className="fa fa-trash-o"
+                        aria-hidden="true" onClick={this.handleDelete(bill.id)}></i>
                     </div>
 
                   </li>

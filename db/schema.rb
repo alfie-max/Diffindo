@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103224738) do
+ActiveRecord::Schema.define(version: 20161108185120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 20161103224738) do
   add_index "bills", ["author_id"], name: "index_bills_on_author_id", using: :btree
   add_index "bills", ["category_id"], name: "index_bills_on_category_id", using: :btree
   add_index "bills", ["payer_id"], name: "index_bills_on_payer_id", using: :btree
+
+  create_table "friends", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "friend_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "friends", ["user_id", "friend_id"], name: "index_friends_on_user_id_and_friend_id", unique: true, using: :btree
 
   create_table "splits", force: :cascade do |t|
     t.integer  "bill_id",    null: false

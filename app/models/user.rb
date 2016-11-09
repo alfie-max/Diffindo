@@ -34,6 +34,17 @@ class User < ActiveRecord::Base
     through: :splits,
     source: :bill
 
+# NEED TO FIX ASSOCIATIONS
+  # has_many :friends_associations,
+  #   primary_key: :id,
+  #   foreign_key: :user_id,
+  #   class_name: :Friend
+  #
+  # has_many :friends,
+  #   through: :friends_associations,
+  #   source: :friend
+  #
+
   after_initialize :ensure_session_token
 
   attr_reader :password
@@ -75,6 +86,11 @@ class User < ActiveRecord::Base
     Bill.joins('LEFT OUTER JOIN splits ON splits.bill_id = bills.id')
     .where("splits.user_id = ? OR author_id = ?", self.id, self.id)
     .order(:date)
+  end
+
+  def friends
+    # DELETE THIS WHEN FRIENDING IS DONE
+    User.all
   end
 
 end

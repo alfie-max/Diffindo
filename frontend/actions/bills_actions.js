@@ -6,7 +6,7 @@ export const CREATE_BILL = "CREATE_BILL";
 export const UPDATE_BILL = "UPDATE_BILL";
 export const DELETE_BILL = "DELETE_BILL";
 
-export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+export const RECEIVE_BILLS_ERRORS = "RECEIVE_BILLS_ERRORS";
 
 export const requestAllBills = () => ({
   type: REQUEST_ALL_BILLS
@@ -44,7 +44,7 @@ export const deleteBill = id => ({
 })
 
 //errors is an array
-export const receiveErrors = (errors) => ({
-  type: RECEIVE_ERRORS,
+export const receiveBillsErrors = (errors) => ({
+  type: RECEIVE_BILLS_ERRORS,
   errors
 })
