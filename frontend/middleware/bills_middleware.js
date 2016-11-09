@@ -25,10 +25,7 @@ const billsMiddleware = ({ dispatch }) => next => action => {
 
   const receiveAllBillsSuccess = (data) => dispatch(receiveAllBills(data));
   const receiveSingleBillSuccess = (data) => dispatch(receiveSingleBill(data));
-  const getBillsErrors = (error) => {
-    console.log("ERror in the MW: ", error.responseJSON);
-    dispatch(receiveBillsErrors(error.responseJSON))
-  };
+  const getBillsErrors = (error) => dispatch(receiveBillsErrors(error);
   const updateBillsState = () => dispatch(requestAllBills());
 
   switch (action.type) {
