@@ -4,8 +4,16 @@ import { keys } from 'lodash';
 export default class SplitWith extends React.Component {
   constructor(props) {
     super(props);
+
+    // splits has all friends objects that are currently splitting.
+    // splits is passed up to bill_modals so it can add to its state,
+    // which will be submitted as a new/updated bill
+
+    // splitsNames is an array os friends username,
+    // to make the logic easier for maitaining the split list
     this.state = {
       inputVal: '',
+      splitsNames: [],
       splits: []
     };
 
@@ -37,7 +45,7 @@ export default class SplitWith extends React.Component {
       // Only display the friend if they match the query
       // and have not been added to the splits list yet.
       if (sub.toLowerCase() === this.state.inputVal.toLowerCase() &&
-        !this.state.splits.includes(friendName) ) {
+        !this.state.splitsNames.includes(friendName) ) {
         matches.push(friendName);
       }
     });
@@ -50,13 +58,20 @@ export default class SplitWith extends React.Component {
   }
 
   selectName(event) {
-    let name = event.currentTarget.innerText;
-    this.setState({splits: this.state.splits.concat(name)});
+    const name = event.currentTarget.innerText;
+    this.setState({splitsNames: this.state.splitsNames.concat(name)});
+
+    const friend = this.props.userFriends[name];
+    this.setState({splits: this.state.splits.concat(friend)});
   }
 
   removeSplit(idx) {
     return e => {
       console.log(`removing ${idx}`);
+      let newSplitsNames = this.state.splitsNames;
+      newSplitsNames.splice(idx, 1);
+      this.setState({splitsNames: newSplitsNames});
+
       let newSplits = this.state.splits;
       newSplits.splice(idx, 1);
       this.setState({splits: newSplits});
@@ -70,9 +85,9 @@ export default class SplitWith extends React.Component {
       );
     });
 
-    console.log(this.state.splits);
+    console.log("Splits is ", this.state.splits);
 
-    let splitsList = this.state.splits.map( (friend, idx) => {
+    let splitsList = this.state.splitsNames.map( (friend, idx) => {
       return (
         <li key={`split-${idx}`}>
           <i className="fa fa-times" aria-hidden="true"
