@@ -34,7 +34,7 @@ class Api::BillsController < ApplicationController
 
     def update
       @bill = Bill.find(params[:id])
-      if @bill.update!(bill_params)
+      if @bill.update(bill_params)
         render "api/bills/show"
       else
         render json: @bill.errors.full_messages, status: 422
