@@ -46,6 +46,8 @@ export default class SplitWith extends React.Component {
     const addedSplits =
       this.state.splits_attributes.concat(splitsToDestroy);
 
+    console.log(this.state);
+
     this.props.handleAddSplit(addedSplits, this.splitAmount);
   }
 
