@@ -49,20 +49,14 @@ class BillsModal extends React.Component {
     let bill = this.state;
     bill.splits_attributes = this.prepareSplitsArray(bill);
     this.props.processForm({bill});
-    // this.props.closeModal();
+    this.props.closeModal();
   }
 
   prepareSplitsArray(bill) {
-    // Should add payer_id to split array.
-    bill.splits_attributes = bill.splits_attributes.concat(
-      {user_id: bill.payer_id, amount: 0}
-    );
-
-    // Then add splitAmount to all users on splits array.
+    // Should add splitAmount to all users on splits array.
     bill.splits_attributes.forEach( split => {
       split.amount = bill.splitAmount;
     })
-
     return bill.splits_attributes
   }
 
