@@ -3,18 +3,17 @@ import SplitWith from './split_with';
 import { selectFriendNamesFromSplit } from '../../../reducers/selectors';
 
 
-const mapStateToProps = ({session, billDetail}, {handleAddSplit, billAmount}) => {
+const mapStateToProps = ({session}, ownProps) => {
+  const splitsAttributes = ownProps.splitsAttributes;
   const currentUser = session.currentUser;
   const userFriends = currentUser.friends;
-  const splitsNames = selectFriendNamesFromSplit(
-    billDetail.splits_attributes);
+  const splitsNames = selectFriendNamesFromSplit(splitsAttributes);
   return {
     currentUser,
     userFriends,
-    billDetail,
+    splitsAttributes,
     splitsNames,
-    billAmount,
-    handleAddSplit
+    handleAddSplit: ownProps.handleAddSplit
   }
 };
 

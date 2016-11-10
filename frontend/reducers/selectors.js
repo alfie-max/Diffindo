@@ -18,14 +18,18 @@ export const selectAllBillsGroupedByMonth = bills => {
 };
 
 
-export const selectFriendNamesFromSplit = splits => {
-  return splits.map( split => {
-    return split.username;
-  });
+export const selectFriendIdsFromSplit = splits => {
+  // let result = [];
+  // splits.forEach( split => {
+  //   result.push(split.username);
+  // });
+  // return result;
+
+  return splits.map(({ user_id }) => user_id);
 }
 
 export const numberOfActiveSplits = splits => {
   // We have to check how many splits currently exist and subtract how many
   // are being destroyed.
-  
+
 }

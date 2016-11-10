@@ -27,9 +27,6 @@ class Dashboard extends React.Component {
 
   }
 
-  componentWillReceiveProps(nextProps) {
-  }
-
 
     openModal(flag, action, id=0) {
       this.setState({modalOpen: flag, modalAction: action});
