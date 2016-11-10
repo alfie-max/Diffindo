@@ -4,11 +4,12 @@ import {
   createBill, updateBill, requestSingleBill
   } from '../../actions/bills_actions';
 
-const mapStateToProps = (state, {billForm}) => {
+const mapStateToProps = ({session, billDetail, formsErrors}, {billForm}) => {
   return {
-    currentUser: state.session.currentUser,
-    billDetail: state.billDetail,
-    billId: billForm.billId
+    currentUser: session.currentUser,
+    billDetail,
+    billId: billForm.billId,
+    errors: formsErrors.billErrors
   }
 };
 

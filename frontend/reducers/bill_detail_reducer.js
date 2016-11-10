@@ -22,7 +22,7 @@ const BillDetailReducer = (state=_defaultState, action) => {
   switch (action.type) {
 
     case RECEIVE_SINGLE_BILL:
-      return merge({}, action.bill);
+      return merge({}, action.bill, {billModal: false});
 
     case RECEIVE_ERRORS:
       const errors = action.errors;

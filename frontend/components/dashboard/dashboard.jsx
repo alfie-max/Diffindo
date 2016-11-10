@@ -27,15 +27,18 @@ class Dashboard extends React.Component {
 
   }
 
+  componentWillReceiveProps(nextProps) {
+  }
+
 
     openModal(flag, action, id=0) {
-      this.setState({modalOpen: flag});
-      this.setState({modalAction: action});
+      this.setState({modalOpen: flag, modalAction: action});
+      // this.setState({modalAction: action});
 
       const title = (action == "create") ? "Add Bill" : "Edit Bill"
-      this.setState({modalTitle: title})
+      this.setState({modalTitle: title, billId: id});
 
-      this.setState({billId: id})
+      // this.setState({billId: id})
     }
 
     closeModal() {

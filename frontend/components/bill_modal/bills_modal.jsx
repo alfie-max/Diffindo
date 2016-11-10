@@ -30,7 +30,6 @@ class BillsModal extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.billForm.modalAction == "edit") {
-      // console.log("New props are ", newProps);
       this.setState(newProps.billDetail);
     }
   }
@@ -48,9 +47,9 @@ class BillsModal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let bill = this.state;
-    // bill.splits_attributes = this.prepareSplitsArray(bill);
-    // this.props.processForm({bill});
-    this.props.closeModal();
+    bill.splits_attributes = this.prepareSplitsArray(bill);
+    this.props.processForm({bill});
+    // this.props.closeModal();
   }
 
   prepareSplitsArray(bill) {
@@ -69,7 +68,7 @@ class BillsModal extends React.Component {
 
   renderErrors() {
     return (
-      <ul className="session-form-errors">
+      <ul className="form-errors">
         {this.props.errors.map( (err, idx) => (
           <li key={`error-${idx}`}>{err}</li>
         ))}
@@ -87,6 +86,8 @@ class BillsModal extends React.Component {
     return (
     <div>
         <div className="main-modal">
+
+          {this.renderErrors()}
 
           <div className="split-with">
             <SplitWithContainer

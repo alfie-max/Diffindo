@@ -1,5 +1,6 @@
 import React from 'react';
-import { keys } from 'lodash';
+import { keys, findKey, values } from 'lodash';
+import { selectFriendNamesFromSplit } from '../../../reducers/selectors';
 
 export default class SplitWith extends React.Component {
   constructor(props) {
@@ -9,15 +10,14 @@ export default class SplitWith extends React.Component {
     // splitting and is passed up to bill_modals so it can add to its
     // state, which will be submitted as a new/updated bill
 
-    // splitsNames is an array of friends username,
-    // to make the logic easier for maitaining the splits_attributes list
     this.state = {
       inputVal: '',
-      splitsNames: [],
       splits_attributes: [],
     };
 
     this.splitAmount = 0;
+
+    this.splitsToDestroy = {};
 
     this.renderFriendsList = false;
 
@@ -40,8 +40,13 @@ export default class SplitWith extends React.Component {
     // making the splits array
     this.updateSplitAmount();
 
-    //Pass the splits array to bill_modal
-    this.props.handleAddSplit(this.state.splits_attributes, this.splitAmount);
+    // Adds splits to destroy to the new splits_attrs and pass them back
+    // to bills_modal
+    const splitsToDestroy = values(this.splitsToDestroy);
+    const addedSplits =
+      this.state.splits_attributes.concat(splitsToDestroy);
+
+    this.props.handleAddSplit(addedSplits, this.splitAmount);
   }
 
   updateSplitAmount() {
@@ -53,7 +58,9 @@ export default class SplitWith extends React.Component {
     const numberOfSplits = this.state.splits_attributes.length + 1;
     const billAmount = this.props.billAmount;
     if (billAmount > 0) {
-      this.splitAmount = billAmount/numberOfSplits;
+      const splitAmount = (billAmount/numberOfSplits).toFixed(2);
+      //Rounding with toFixed returns a string, so we have to convert it back to float
+      this.splitAmount = parseFloat(splitAmount);
     }
   };
 
@@ -73,16 +80,16 @@ export default class SplitWith extends React.Component {
     //   return this.props.names;
     // }
 
-    const shouldDisplayName = friendName => {
+    const shouldDisplayName = (friendName, friendId) => {
       //Returns true if friendName:
       // • is not currentUser (self);
       // • matches the query string;
       // • hasn't been added to the list to be displayed
       let sub = friendName.slice(0, this.state.inputVal.length);
 
-      const friendId = this.props.userFriends[friendName].id;
       const queryString = this.state.inputVal.toLowerCase();
-      const namesOnList = this.state.splitsNames;
+      const namesOnList =
+        selectFriendNamesFromSplit(this.state.splits_attributes);
 
       return (
         friendId != this.props.currentUser.id &&
@@ -91,10 +98,11 @@ export default class SplitWith extends React.Component {
       )
     }
 
-    keys(this.props.userFriends).forEach( friendName => {
+    keys(this.props.userFriends).forEach( friendId => {
       // Only display the friend if they match the query
       // and have not been added to the splits list yet.
-      if (shouldDisplayName(friendName)) {
+      const friendName = this.props.userFriends[friendId].username;
+      if (shouldDisplayName(friendName, friendId)) {
         matches.push(friendName);
       }
     });
@@ -109,31 +117,48 @@ export default class SplitWith extends React.Component {
   addSplit(event) {
     // Prepping the displayed names array
     const name = event.currentTarget.innerText;
-    const newSplitsNames = this.state.splitsNames.concat(name);
+    let newSplits;
+
+    if (this.splitsToDestroy[name]) {
+      // If the split is on the db and we just removed it, put it back,
+      // reset the _destroy flag and delete from obj
+      delete this.splitsToDestroy[name]._destroy;
+      newSplits = this.state.splits_attributes.concat(
+        this.splitsToDestroy[name]
+      );
+      delete this.splitsToDestroy[name];
+
+    } else {
+      // If not, add to splits_attrs as a new split
+      const friendId = findKey(this.props.userFriends, {username: name});
+      newSplits = this.state.splits_attributes.concat(
+        {user_id: friendId, amount: 0, username: name}
+      );
+    }
 
     // Prepping the splits objs array. On bills_modal#submit, the payer_id,
     // as well as the split amounts for all splits, will be added
-    const friend = this.props.userFriends[name];
-    const newSplits = this.state.splits_attributes.concat(
-      {user_id: friend.id, amount: 0}
-    );
 
     this.setState(
-      {splitsNames: newSplitsNames, splits_attributes: newSplits}
+      {splits_attributes: newSplits}
     );
 
   }
 
   removeSplit(idx) {
     return e => {
-      let newSplitsNames = this.state.splitsNames;
-      newSplitsNames.splice(idx, 1);
-
       let newSplits = this.state.splits_attributes;
-      newSplits.splice(idx, 1);
+      //.splice returns an array, so we take the first element from it
+      const splitToDelete = newSplits.splice(idx, 1)[0];
+      // If the splits exists in the db, we set it to destroy and add it
+      // to helper array.
+      if (splitToDelete.id) {
+        splitToDelete._destroy = true;
+        this.splitsToDestroy[splitToDelete.username] = splitToDelete;
+      }
 
       this.setState(
-        {splitsNames: newSplitsNames, splits_attributes: newSplits}
+        {splits_attributes: newSplits}
       );
     }
   }
@@ -146,11 +171,11 @@ export default class SplitWith extends React.Component {
       );
     });
 
-    let splitsList = this.state.splitsNames.map( (friend, idx) => {
+    let splitsList = this.state.splits_attributes.map( (split, idx) => {
       return (
         <li key={`split-${idx}`}>
           <i className="fa fa-times" aria-hidden="true"
-            onClick={this.removeSplit(idx)}/>{friend}
+            onClick={this.removeSplit(idx)}/>{split.username}
         </li>
       );
     });

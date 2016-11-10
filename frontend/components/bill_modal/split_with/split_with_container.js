@@ -1,14 +1,18 @@
 import { connect } from 'react-redux';
 import SplitWith from './split_with';
-import { mapFriendNameToFriendObj } from '../../../reducers/selectors';
+import { selectFriendNamesFromSplit } from '../../../reducers/selectors';
 
 
 const mapStateToProps = ({session, billDetail}, {handleAddSplit, billAmount}) => {
-  console.log("On SW container", billDetail);
+  const currentUser = session.currentUser;
+  const userFriends = currentUser.friends;
+  const splitsNames = selectFriendNamesFromSplit(
+    billDetail.splits_attributes);
   return {
-    currentUser: session.currentUser,
-    userFriends: session.currentUser.friends,
+    currentUser,
+    userFriends,
     billDetail,
+    splitsNames,
     billAmount,
     handleAddSplit
   }

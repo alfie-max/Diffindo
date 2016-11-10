@@ -6,10 +6,12 @@ import {
   CREATE_BILL,
   UPDATE_BILL,
   DELETE_BILL,
+  FINISH_BILL_TRANSACTION,
   requestAllBills,
   receiveAllBills,
   receiveSingleBill,
-  receiveBillsErrors
+  receiveBillsErrors,
+  finishBillTransaction
 } from '../actions/bills_actions'
 
 import {
@@ -25,11 +27,12 @@ const billsMiddleware = ({ dispatch }) => next => action => {
 
   const receiveAllBillsSuccess = (data) => dispatch(receiveAllBills(data));
   const receiveSingleBillSuccess = (data) => dispatch(receiveSingleBill(data));
-  const getBillsErrors = (error) => dispatch(receiveBillsErrors(error));
-  const updateBillsState = () => dispatch(requestAllBills());
+  const getBillsErrors = (error) => dispatch(receiveBillsErrors(error.responseJSON));
+  const billTransactionSuccess = (data) => dispatch(requestAllBills(data));
 
   switch (action.type) {
 
+    case FINISH_BILL_TRANSACTION:
     case REQUEST_ALL_BILLS:
       fetchAllBills(receiveAllBillsSuccess, getBillsErrors);
       return next(action);
@@ -39,15 +42,15 @@ const billsMiddleware = ({ dispatch }) => next => action => {
       return next(action);
 
     case CREATE_BILL:
-      postBill(action.bill, updateBillsState, getBillsErrors);
+      postBill(action.bill, billTransactionSuccess, getBillsErrors);
       return next(action);
 
     case UPDATE_BILL:
-      patchBill(action.id, action.bill, updateBillsState, getBillsErrors);
+      patchBill(action.id, action.bill, billTransactionSuccess, getBillsErrors);
       return next(action);
 
     case DELETE_BILL:
-      deleteBill(action.id, updateBillsState, getBillsErrors);
+      deleteBill(action.id, billTransactionSuccess, getBillsErrors);
       return next(action);
 
     default:

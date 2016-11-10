@@ -5,6 +5,7 @@ export const RECEIVE_SINGLE_BILL = "RECEIVE_SINGLE_BILL";
 export const CREATE_BILL = "CREATE_BILL";
 export const UPDATE_BILL = "UPDATE_BILL";
 export const DELETE_BILL = "DELETE_BILL";
+export const FINISH_BILL_TRANSACTION = "FINISH_BILL_TRANSACTION";
 
 export const RECEIVE_BILLS_ERRORS = "RECEIVE_BILLS_ERRORS";
 
@@ -41,6 +42,10 @@ export const updateBill = bill => ({
 export const deleteBill = id => ({
   type: DELETE_BILL,
   id
+})
+
+export const finishBillTransaction = () => ({
+  type: FINISH_BILL_TRANSACTION
 })
 
 //errors is an array

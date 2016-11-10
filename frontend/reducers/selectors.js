@@ -18,12 +18,14 @@ export const selectAllBillsGroupedByMonth = bills => {
 };
 
 
-export const mapFriendNameToFriendObj = friends => {
-   //keys are the names and vals are the obj themselves
-   console.log("Friends are ",friends.keys);
-   let result = [];
-   friends.keys.forEach( friend => {
-     result.push([friend, friends[friend]])
-   })
-   return result;
+export const selectFriendNamesFromSplit = splits => {
+  return splits.map( split => {
+    return split.username;
+  });
+}
+
+export const numberOfActiveSplits = splits => {
+  // We have to check how many splits currently exist and subtract how many
+  // are being destroyed.
+  
 }

@@ -5,7 +5,7 @@ import {
 } from '../actions/bills_actions'
 
 const _defaultState = {
-  errors: []
+  billErrors: []
 }
 
 const FormsErrorsReducer = (state=_defaultState, action) => {
@@ -14,8 +14,8 @@ const FormsErrorsReducer = (state=_defaultState, action) => {
 
     case RECEIVE_BILLS_ERRORS:
     console.log("Receiving errors: ", action);
-      const errors = action.errors;
-      return merge({}, _defaultState, {errors});
+      const billErrors = action.errors;
+      return merge({}, _defaultState, {billErrors});
 
     default:
       return state;
