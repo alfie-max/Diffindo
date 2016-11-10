@@ -1,8 +1,12 @@
 
+num_users = 11
+num_bills = 30
+num_splits = 20
+
 # USERS
 
 users = {}
-for i in (1..10)
+for i in (1..num_users-1)
   username = Faker::Name.name
   email = Faker::Internet.email(username)
 
@@ -11,7 +15,7 @@ end
 
 guest = User.create!(username: "Meryl", email: "meryl@burbankgalaxy.com", password: "password", activated: true)
 
-users[11] = guest
+users[num_users] = guest
 
 # BILLS
 
@@ -31,7 +35,7 @@ TITLES = [
 
 bills = {}
 
-for i in (1..30)
+for i in (1..num_bills)
   title = TITLES[rand(TITLES.length)]
   amount = Faker::Commerce.price
   cat_id = 1
@@ -49,7 +53,8 @@ end
 
 splits = {}
 
-for i in (1..20)
+# Generate random splits
+for i in (1..num_splits)
   bill_id = bills[rand(30)+1].id
   user_id = users[rand(11)+1].id
   while user_id == bills[bill_id].payer_id
