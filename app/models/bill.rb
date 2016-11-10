@@ -60,4 +60,12 @@ class Bill < ActiveRecord::Base
     through: :splits,
     source: :user
 
+    # Creating a custom index to be used on index.json.jbuilder to avoid two issues:
+    # • if json.set! bill.date, it will merge two bills from the same date
+    # • if json.set! bill.id, it will order the bills by the ID instead of the date
+    # Therefore, we concat the two to make a new key that fixes both issues.
+    def custom_date
+      return "#{self.date} - #{self.id}"
+    end
+
 end
