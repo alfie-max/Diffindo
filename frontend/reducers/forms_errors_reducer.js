@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 
 import {
-  RECEIVE_BILLS_ERRORS
+  RECEIVE_BILLS_ERRORS, CLEAR_BILLS_ERRORS
 } from '../actions/bills_actions'
 
 const _defaultState = {
@@ -13,9 +13,11 @@ const FormsErrorsReducer = (state=_defaultState, action) => {
   switch (action.type) {
 
     case RECEIVE_BILLS_ERRORS:
-    console.log("Receiving errors: ", action);
       const billErrors = action.errors;
       return merge({}, _defaultState, {billErrors});
+
+    case CLEAR_BILLS_ERRORS:
+      return _defaultState;
 
     default:
       return state;

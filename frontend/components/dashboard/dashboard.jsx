@@ -39,7 +39,8 @@ class Dashboard extends React.Component {
     }
 
     closeModal() {
-      this.setState({modalOpen: false})
+      this.setState({modalOpen: false});
+      // this.props.clearFormsErrors();
     }
 
 

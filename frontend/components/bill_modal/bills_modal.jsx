@@ -1,6 +1,6 @@
 import React from 'react';
 import SplitWith from './split_with/split_with';
-import { differenceWith, isEqual } from 'lodash';
+import { differenceWith, isEqual, find } from 'lodash';
 
 class BillsModal extends React.Component {
 
@@ -21,6 +21,8 @@ class BillsModal extends React.Component {
 
     this.splitAmount = 0;
 
+    this.hasSubmitForm = false;
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUpdateSplits = this.handleUpdateSplits.bind(this);
   }
@@ -31,11 +33,19 @@ class BillsModal extends React.Component {
     }
   }
 
-  componentWillReceiveProps({billForm, billDetail}) {
+  componentWillReceiveProps({billForm, billDetail, errors}) {
     if (billForm.modalAction == "edit") {
       this.setState(billDetail);
       this.updateSplitAmount(billDetail.amount, billDetail.splits_attributes);
     }
+
+    if (this.hasSubmitForm && errors.length === 0) {
+      this.props.closeModal();
+      this.hasSubmitForm = false;
+    } else {
+      this.hasSubmitForm = false;
+    }
+    console.log(this.state.splits_attributes);
   }
 
   changeMain(val) {
@@ -50,9 +60,14 @@ class BillsModal extends React.Component {
   };
 
   updateSplitAmount(billAmount, splits = this.state.splits_attributes) {
-    // When we submit, we'll add payer_id to the splits array.
-    // For now, we compensate by adding 1 to the numberOfSplits.
-    const numberOfSplits = splits.length + 1;
+    // For a new bill, there's no payer on the splits array yet, so we compensate
+    let numberOfSplits;
+    if (splits.length === 0) {
+       numberOfSplits = 1;
+    } else {
+      numberOfSplits = splits.length;
+    };
+
     if (billAmount > 0) {
       const splitAmount = (billAmount/numberOfSplits).toFixed(2);
       //Rounding with toFixed returns a string, so we have to convert it back to float
@@ -65,12 +80,14 @@ class BillsModal extends React.Component {
     e.preventDefault();
     let bill = this.state;
     bill.splits_attributes = this.prepareSplitsArray(bill);
-    console.log("Final bill is ", bill);
     this.props.processForm({bill});
-    this.props.closeModal();
+    this.hasSubmitForm = true;
   }
 
   prepareSplitsArray(bill) {
+
+
+    // Adds payer_id to newSplits if new bill
     // Compares current splits with what's on store's state:
     // • New elements should be added;
     // • Missing elements should have _destroy set to true;
@@ -78,22 +95,25 @@ class BillsModal extends React.Component {
     // Lastly, should add splitAmount to all users on splits array.
 
     const existingSplits = this.props.billDetail.splits_attributes;
-    const newSplits = this.state.splits_attributes;
+    let newSplits = this.state.splits_attributes;
     let resultingSplits = newSplits;
 
-    // Set _destroy on missing splits
+    const payerInSplit = (split) => split.user_id === bill.payer_id
+    if (!newSplits.find(payerInSplit)) {
+      resultingSplits = resultingSplits.concat({user_id: bill.payer_id});
+    };
 
+    // Set _destroy on missing splits
     let splitsToDestroy = differenceWith(existingSplits, newSplits, isEqual);
     splitsToDestroy.forEach( split => {
         split._destroy = true;
       });
     resultingSplits = resultingSplits.concat(splitsToDestroy);
-    console.log(bill);
     resultingSplits.forEach( split => {
       split.amount = bill.splitAmount;
     });
 
-    return resultingSplits
+    return resultingSplits;
 
   }
 
@@ -109,6 +129,7 @@ class BillsModal extends React.Component {
 
   handleUpdateSplits(splits_attributes) {
     this.setState({ splits_attributes })
+    this.updateSplitAmount(this.state.amount, splits_attributes);
   };
 
 

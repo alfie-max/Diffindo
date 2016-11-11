@@ -3,7 +3,6 @@ import SessionReducer from './session_reducer';
 import BillsReducer from './bills_reducer';
 import BillDetailReducer from './bill_detail_reducer';
 import FormsErrorsReducer from './forms_errors_reducer';
-import ModalsReducer from './modals_reducer';
 import { LOGOUT } from '../actions/session_actions'
 
 const AppReducer = combineReducers({
@@ -11,7 +10,6 @@ const AppReducer = combineReducers({
   bills: BillsReducer,
   billDetail: BillDetailReducer,
   formsErrors: FormsErrorsReducer,
-  modalStatus: ModalsReducer
 });
 
 

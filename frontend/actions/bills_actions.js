@@ -6,8 +6,8 @@ export const CREATE_BILL = "CREATE_BILL";
 export const UPDATE_BILL = "UPDATE_BILL";
 export const DELETE_BILL = "DELETE_BILL";
 export const FINISH_BILL_TRANSACTION = "FINISH_BILL_TRANSACTION";
-
 export const RECEIVE_BILLS_ERRORS = "RECEIVE_BILLS_ERRORS";
+export const CLEAR_BILLS_ERRORS = "CLEAR_BILLS_ERRORS";
 
 export const requestAllBills = () => ({
   type: REQUEST_ALL_BILLS
@@ -52,4 +52,8 @@ export const finishBillTransaction = () => ({
 export const receiveBillsErrors = (errors) => ({
   type: RECEIVE_BILLS_ERRORS,
   errors
+})
+
+export const clearBillsErrors = () => ({
+  type: CLEAR_BILLS_ERRORS
 })

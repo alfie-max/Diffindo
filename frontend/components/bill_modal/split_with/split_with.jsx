@@ -35,15 +35,14 @@ export default class SplitWith extends React.Component {
       // • matches the query string;
       // • hasn't been added to splitsAttributes
       let sub = friendName.slice(0, this.state.inputVal.length);
-
       const queryString = this.state.inputVal.toLowerCase();
       const usersOnList =
         selectFriendIdsFromSplit(this.props.splitsAttributes);
-
       return (
         friendId != this.props.currentUser.id &&
         sub.toLowerCase() === queryString &&
-        !usersOnList.includes(friendId)
+        !usersOnList.includes(parseInt(friendId))
+        // friendId came from keys(userFriends), which returns an array of strings, even if the keys are ints.
       )
     }
 
@@ -70,7 +69,7 @@ export default class SplitWith extends React.Component {
     const username = event.currentTarget.innerText;
 
     const userFriends = this.props.currentUser.friends;
-    const friendId = findKey(userFriends, {username});
+    const friendId = parseInt(findKey(userFriends, {username}));
     const newSplits = this.props.splitsAttributes.concat(
       {user_id: friendId, amount: 0, username}
     );
@@ -92,7 +91,7 @@ export default class SplitWith extends React.Component {
   render() {
 
     let splitsList = this.props.splitsAttributes.map( (split, idx) => {
-      return (
+      if (split.user_id !== this.props.currentUser.id) return (
         <li key={`split-${idx}`}>
           <i className="fa fa-times" aria-hidden="true"
             onClick={this.removeSplit(idx)}/>{split.username}
