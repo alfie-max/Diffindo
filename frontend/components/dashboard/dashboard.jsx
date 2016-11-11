@@ -69,7 +69,7 @@ class Dashboard extends React.Component {
     return(
       <div className="row dashboard clearfix">
         <div className="col-md-2 left-sidebar">
-          <LeftSidebarContainer props={this.props}/>
+          <LeftSidebarContainer openModal={this.openModal}/>
         </div>
 
         <div className="col-md-10 main-view">
@@ -86,7 +86,7 @@ class Dashboard extends React.Component {
         <Modal
           isOpen={this.state.modalOpen}
           onRequestClose={this.closeModal}
-          overlayClassName="bill-modal-overlay row"
+          overlayClassName="modal-overlay row"
           className="bill-modal">
 
           <div className="modal-title">

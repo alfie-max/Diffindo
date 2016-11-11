@@ -24,6 +24,43 @@
   box-shadow: black 0px 1px 3px;
 }
 
+.user-friends {
+  display: flex;
+}
+
+.sidebar-friends-list {
+  flex: 1 50%;
+  border-right: 3px solid rgba(0, 0, 0, 0.15);
+  margin: -10px 0;
+}
+
+.add-friend {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  margin: -10px 0;  
+  -webkit-transition: background-color 100ms, color 100ms;
+}
+
+.add-friend:hover {
+  background-color: rgba(255,255,255,0.2);
+  cursor: pointer;
+  color: #ecf0f1;
+  -webkit-transition: background-color 100ms, color 100ms;
+}
+
+.left-sidebar .add-friend i {
+  margin: 0;
+}
+
+.user-friends ul li {
+  margin: 5px 0 10px 30px;
+  font-size: 13px;
+}
+
 .section-split {
   border-top: 3px solid rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -42,7 +79,6 @@
   color: #ecf0f1;
   cursor: pointer;
   -webkit-transition: border 100ms, background-color 100ms, color 100ms;
-
 }
 
 .left-sidebar i {

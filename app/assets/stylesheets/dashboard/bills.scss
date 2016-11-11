@@ -16,7 +16,6 @@
 }
 
 .bills-list {
-
 }
 
 .bill-item {
@@ -70,6 +69,11 @@
 .bill-actions i {
   padding: 0 10px;
   font-size: 25px;
+}
+
+.bill-actions i:hover {
+  opacity: 0.8;
+  -webkit-transition: opacity 100ms;
 }
 
 .bill-actions i:hover {
