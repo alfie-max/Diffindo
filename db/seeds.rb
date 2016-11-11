@@ -30,7 +30,7 @@ TITLES = [
   "Comcast",
   "PGE",
   "hotel in NY",
-  "Plane tkt for Israel",
+  "Plane tkt for NY",
   "brunch @ Hobee's",
   "Subway lunch",
   "Cookies from Specialties",
@@ -38,7 +38,7 @@ TITLES = [
   "Clothes for the kids",
   "Groceries",
   "Dinner at Luke's",
-  "Movie tkt",
+  "Movie tkts",
   "Dog food",
   "Electricity",
   "Utilities",
@@ -101,7 +101,7 @@ num_users.times do
     Friendship.create(user_id: user_id, friend_id: bills[bill_id].payer_id)
 
   end
-  
+
 end
 
 
