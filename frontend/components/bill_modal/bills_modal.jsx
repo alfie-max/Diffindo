@@ -33,6 +33,15 @@ class BillsModal extends React.Component {
     }
   }
 
+  componentDidMount() {
+    // If the splits are empty, fill in the payer_id with currentUser
+    // If the form is an edit one, the splits will be overwritten when the new props arrive.
+    if (this.state.splits_attributes.length === 0) {
+      const splits_attributes = [{user_id: this.props.currentUser.id}];
+      this.setState({splits_attributes});
+    }
+  }
+
   componentWillReceiveProps({billForm, billDetail, errors}) {
     if (billForm.modalAction == "edit") {
       this.setState(billDetail);
@@ -45,7 +54,6 @@ class BillsModal extends React.Component {
     } else {
       this.hasSubmitForm = false;
     }
-    console.log(this.state.splits_attributes);
   }
 
   changeMain(val) {
@@ -97,11 +105,6 @@ class BillsModal extends React.Component {
     const existingSplits = this.props.billDetail.splits_attributes;
     let newSplits = this.state.splits_attributes;
     let resultingSplits = newSplits;
-
-    const payerInSplit = (split) => split.user_id === bill.payer_id
-    if (!newSplits.find(payerInSplit)) {
-      resultingSplits = resultingSplits.concat({user_id: bill.payer_id});
-    };
 
     // Set _destroy on missing splits
     let splitsToDestroy = differenceWith(existingSplits, newSplits, isEqual);
