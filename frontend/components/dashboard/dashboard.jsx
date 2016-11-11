@@ -6,6 +6,7 @@ import LeftSidebarContainer from '../left_sidebar/left_sidebar_container';
 import TopBarContainer from '../top_bar/top_bar_container';
 import TransactionsContainer from '../transactions/transactions_container';
 import BillsModalContainer from '../bill_modal/bills_modal_container';
+import AddFriendContainer from '../friends/add_friend_container';
 
 
 class Dashboard extends React.Component {
@@ -47,7 +48,9 @@ class Dashboard extends React.Component {
       case "friend":
         title = "Invite a Friend";
         this.setState({
+          modalType: type,
           modalOpen: true,
+          modalAction: action,
           modalTitle: title
         });
         break;
@@ -65,7 +68,7 @@ class Dashboard extends React.Component {
 
   render() {
 
-    const renderDashboard = () => {
+    const renderModal = () => {
       switch (this.state.modalType) {
         case "bill":
           return (
@@ -76,7 +79,12 @@ class Dashboard extends React.Component {
           );
 
         case "friend":
-          return;
+        return (
+          <AddFriendContainer
+            addFriendForm={this.state}
+            closeModal={this.closeModal}
+            />
+        );
 
         default:
           return "";
@@ -101,7 +109,7 @@ class Dashboard extends React.Component {
 
         </div>
 
-        {renderDashboard()}
+        {renderModal()}
 
       </div>
     );

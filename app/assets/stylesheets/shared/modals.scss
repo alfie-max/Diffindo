@@ -1,0 +1,14 @@
+.modal-form .title,
+.modal-form .amount,
+.modal-form .friend-name,
+.modal-form .friend-email,
+.modal-form .friend-message {
+  border-bottom: #ddd 1px dashed;
+  padding: 3px 0;
+  font-size: 20px;
+}
+
+.form-errors {
+  text-align: center;
+  margin: 10px 0;
+}

@@ -16,6 +16,7 @@
 
  @import "./shared/reset";
  @import "./shared/grid";
+ @import "./shared/modals";
  @import "./session_form";
  @import "./dashboard/dashboard";
  @import "./dashboard/left_sidebar";
@@ -23,6 +24,7 @@
  @import "./dashboard/transactions";
  @import "./dashboard/bills";
  @import "./dashboard/bill_modal";
+ @import "./dashboard/friend_modal";
 
 
 .button-green {

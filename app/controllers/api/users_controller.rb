@@ -4,7 +4,9 @@ class Api::UsersController < ApplicationController
 #Have to check if user exists. If so, then need to check for activated flag. If set to false, then transfer to #patch. If not, proceed with normal creation
 
   def create
+
     @user = User.new(user_params)
+
     if @user.save
       login(@user)
       render "api/users/show"
@@ -30,4 +32,5 @@ class Api::UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password, :activated,
       friendships_attributes: [:id, :friend_id])
   end
+
 end

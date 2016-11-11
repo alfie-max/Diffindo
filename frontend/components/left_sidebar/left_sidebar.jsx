@@ -26,12 +26,21 @@ class LeftSidebar extends React.Component {
   }
 
   openModal() {
-    this.props.openModal(true, "create")
+    this.props.openModal("friend", "create");
   }
 
   handleLogout() {
     this.props.logout();
   };
+
+  futureImplementation() {
+    youAreOwed = (
+      <h3 className="amount">
+        You are owed<br/>
+      <span className="green">$34.65</span>
+      </h3>
+    );
+  }
 
   render() {
     const friendsList = values(this.props.currentUser.friends);
@@ -45,22 +54,18 @@ class LeftSidebar extends React.Component {
         <section className="user-greeting">
           <img src="http://www.aveleyman.com/Gallery/ActorsL/10388-24033.gif" />
           <h2>Hello, {this.props.currentUser.username}</h2>
-          <h3 className="amount">
-            You are owed<br/>
-          <span className="green">$34.65</span>
-          </h3>
 
         </section>
 
         <div className="section-split"></div>
 
         <section>
-          <p><i className="fa fa-file-text" aria-hidden="true"></i>Bills</p>
+          <p className=""><i className="fa fa-file-text" aria-hidden="true"></i>Bills</p>
 
-          <p><i className="fa fa-calendar"
+          <p className="deactivated"><i className="fa fa-calendar"
             aria-hidden="true"></i>Recent Activity</p>
 
-          <p><i className="fa fa-usd"
+          <p className="deactivated"><i className="fa fa-usd"
             aria-hidden="true"></i>All Expenses</p>
         </section>
 
@@ -84,11 +89,18 @@ class LeftSidebar extends React.Component {
         <div className="section-split"></div>
 
         <section>
-          <p><i className="fa fa-user"
-            aria-hidden="true"></i>Account</p>
 
-          <p><i className="fa fa-question"
-            aria-hidden="true"></i>Help</p>
+          <a href="https://github.com/clapinton/Diffindo/blob/master/README.md"
+            target="_blank">
+            <p><i className="fa fa-question"
+              aria-hidden="true"></i>Help</p>
+          </a>
+
+          <a href="https://www.linkedin.com/in/ericoliveira"
+            target="_blank">
+            <p><i className="fa fa-user"
+              aria-hidden="true"></i>Contact Us</p>
+          </a>
 
           <button onClick={this.handleLogout}><i className="fa fa-power-off"
             aria-hidden="true"></i>Logout</button>
