@@ -10,7 +10,7 @@ class TopBar extends React.Component {
   }
 
   openModal() {
-    this.props.openModal(true, "create")
+    this.props.openModal("bill", "create")
   }
 
 

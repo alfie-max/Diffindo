@@ -11,7 +11,7 @@ class Bills extends React.Component {
 
   openModal (id) {
     return e => {
-      this.props.openModal(true, "edit", id);
+      this.props.openModal("bill", "edit", id);
     }
   }
 

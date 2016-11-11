@@ -1,6 +1,8 @@
 json.extract! user, :id, :username
 json.friends do
-  json.array! user.friends do |friend|
-    json.extract! friend, :id, :username
+  user.friends.each do |friend|
+    json.set! friend.id do
+      json.extract! friend, :id, :username
+    end
   end
 end

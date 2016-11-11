@@ -1,11 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router';
 import LeftSidebarContainer from '../left_sidebar/left_sidebar_container';
 import TopBarContainer from '../top_bar/top_bar_container';
 import TransactionsContainer from '../transactions/transactions_container';
 import BillsModalContainer from '../bill_modal/bills_modal_container';
-import Modal from 'react-modal';
 
 
 class Dashboard extends React.Component {
@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
     this.renderDashboard = true;
 
     this.state = {
+      modalType: "",
       modalOpen: false,
       modalAction: "",
       modalTitle: "",
@@ -22,49 +23,66 @@ class Dashboard extends React.Component {
 
     }
 
-    // this.hasSubmitForm = false;
-
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    // this.formSubmit = this.formSubmit.bind(this);
 
-  }
-
-
-  componentWillReceiveProps() {
-    console.log("db receiving props");
-    // if (this.hasSubmitForm && billsErrors.length === 0) {
-    //   this.closeModal();
-    //   this.hasSubmitForm = false;
-    // } else {
-    //   this.hasSubmitForm = false;
-    // }
   }
 
 
   openModal(type, action, id=0) {
 
-    this.setState({modalOpen: true, modalAction: action});
-    // this.setState({modalAction: action});
+    let title;
+    switch (type) {
+      case "bill":
+        title = (action == "create") ? "Add Bill" : "Edit Bill"
+        this.setState({
+          modalType: type,
+          modalOpen: true,
+          modalAction: action,
+          modalTitle: title,
+          billId: id
+        });
+        break;
 
-    const title = (action == "create") ? "Add Bill" : "Edit Bill"
-    this.setState({modalTitle: title, billId: id});
+      case "friend":
+        title = "Invite a Friend";
+        this.setState({
+          modalOpen: true,
+          modalTitle: title
+        });
+        break;
 
-    // this.setState({billId: id})
+      default:
+        return;
+    }
   }
 
-  // formSubmit() {
-  //   console.log("Form submitted");
-  //   this.hasSubmitForm = true;
-  // }
-
   closeModal() {
-    this.setState({modalOpen: false});
+    this.setState({modalOpen: false, modalType: ""});
     this.props.clearAllErrors();
   }
 
 
   render() {
+
+    const renderDashboard = () => {
+      switch (this.state.modalType) {
+        case "bill":
+          return (
+            <BillsModalContainer
+              billForm={this.state}
+              closeModal={this.closeModal}
+              />
+          );
+
+        case "friend":
+          return;
+
+        default:
+          return "";
+
+      }
+    }
 
     return(
       <div className="row dashboard clearfix">
@@ -83,26 +101,7 @@ class Dashboard extends React.Component {
 
         </div>
 
-        <Modal
-          isOpen={this.state.modalOpen}
-          onRequestClose={this.closeModal}
-          overlayClassName="modal-overlay row"
-          className="bill-modal">
-
-          REFACTOR HERE! IT SHOULD GO INSIDE THE BILLSMODALCONTAINER
-
-          <div className="modal-title">
-            <h3>{this.state.modalTitle}</h3>
-            <i className="fa fa-times" aria-hidden="true" onClick={this.closeModal}></i>
-          </div>
-
-          <BillsModalContainer
-            billForm={this.state}
-            closeModal={this.closeModal}
-            formSubmit={this.formSubmit}
-            />
-
-        </Modal>
+        {renderDashboard()}
 
       </div>
     );

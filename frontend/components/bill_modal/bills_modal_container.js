@@ -7,14 +7,15 @@ import {clearAllErrors} from '../../actions/forms_actions';
 
 const mapStateToProps = (
   {session, billDetail, bills, formsErrors},
-  {billForm, closeModal, formSubmit}) => {
+  {billForm, closeModal}) => {
   return {
     currentUser: session.currentUser,
+    modalOpen: billForm.modalOpen,
+    modalTitle: billForm.modalTitle,
     billDetail,
     billId: billForm.billId,
     errors: formsErrors.billErrors,
     closeModal,
-    formSubmit,
     bills
   }
 };

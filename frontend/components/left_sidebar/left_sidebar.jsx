@@ -1,6 +1,7 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
 import { Link } from 'react-router';
+import { values } from 'lodash';
 
 class LeftSidebar extends React.Component {
 
@@ -33,9 +34,8 @@ class LeftSidebar extends React.Component {
   };
 
   render() {
-    console.log(this.props.currentUser.friends);
-
-    const renderFriends = this.props.currentUser.friends.map(
+    const friendsList = values(this.props.currentUser.friends);
+    const renderFriends = friendsList.map(
        (friend, idx) => (
       <li key={`friend-${idx}`}>{friend.username}</li>
     ));

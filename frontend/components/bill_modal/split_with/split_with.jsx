@@ -92,6 +92,8 @@ export default class SplitWith extends React.Component {
 
   render() {
 
+    // debugger
+
     let splitsList = this.props.splitsAttributes.map( (split, idx) => {
       if (split.user_id !== this.props.currentUser.id) return (
         <li key={`split-${idx}`}>
@@ -100,6 +102,8 @@ export default class SplitWith extends React.Component {
         </li>
       );
     });
+
+    // debugger
 
     let results = this.matches().map((result, i) => {
       return (

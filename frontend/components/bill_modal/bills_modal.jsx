@@ -1,6 +1,7 @@
 import React from 'react';
 import SplitWith from './split_with/split_with';
 import { differenceWith, isEqual, find } from 'lodash';
+import Modal from 'react-modal';
 
 class BillsModal extends React.Component {
 
@@ -66,9 +67,9 @@ class BillsModal extends React.Component {
     }
   }
 
-  changeMain(val) {
-    this.setState({value: val})
-  }
+  // changeMain(val) {
+  //   this.setState({value: val})
+  // }
 
   update(property) {
     return e => {
@@ -151,6 +152,8 @@ class BillsModal extends React.Component {
 
   render() {
 
+
+
     let payerName;
      if (this.state.payer_id == this.props.currentUser.id) {
        payerName = "you";
@@ -159,55 +162,69 @@ class BillsModal extends React.Component {
      }
 
     return (
-    <div>
-        <div className="main-modal">
+      <div>
+        <Modal
+          isOpen={this.props.modalOpen}
+          onRequestClose={this.props.closeModal}
+          overlayClassName="modal-overlay row"
+          className="bill-modal">
 
-          {this.renderErrors()}
-
-          <div className="split-with">
-            <SplitWith
-              currentUser={this.props.currentUser}
-              handleUpdateSplits={this.handleUpdateSplits}
-              splitsAttributes={this.state.splits_attributes}/>
+          <div className="modal-title">
+            <h3>{this.props.modalTitle}</h3>
+            <i className="fa fa-times" aria-hidden="true"
+              onClick={this.props.closeModal}></i>
           </div>
 
-          <div className="modal-form clearfix">
+          <div className="main-modal">
 
+            {this.renderErrors()}
 
-            <div className="category">
-              <i className="fa fa-money" aria-hidden="true"></i>
+            <div className="split-with">
+              <SplitWith
+                currentUser={this.props.currentUser}
+                handleUpdateSplits={this.handleUpdateSplits}
+                splitsAttributes={this.state.splits_attributes}/>
             </div>
 
-            <div>
-              <input type="text" className="title"
-                placeholder="Enter a description"
-                onChange={this.update("title")}
-                value={this.state.title}/>
+            <div className="modal-form clearfix">
+
+
+              <div className="category">
+                <i className="fa fa-money" aria-hidden="true"></i>
+              </div>
+
+              <div>
+                <input type="text" className="title"
+                  placeholder="Enter a description"
+                  onChange={this.update("title")}
+                  value={this.state.title}/>
+              </div>
+
+              <div className="amount">
+                <span>$</span>
+                <input type="number" min="0" placeholder="0.00"
+                  onChange={this.update("amount")}
+                  value={this.state.amount}/>
+              </div>
+
+              <div className="payment-info">
+                <p>Paid by <span>{payerName}</span> and split equally</p>
+                <p>(${this.state.splitAmount} / person)</p>
+              </div>
+
+              <div className="date">
+                <input type="date" onChange={this.update("date")}
+                  value={this.state.date}/>
+              </div>
+
+
             </div>
-
-            <div className="amount">
-              <span>$</span>
-              <input type="number" min="0" placeholder="0.00"
-                onChange={this.update("amount")}
-                value={this.state.amount}/>
+            <div className="modal-actions">
+              <button className="button-green" onClick={this.handleSubmit}>Save</button>
             </div>
-
-            <div className="payment-info">
-              <p>Paid by <span>{payerName}</span> and split equally</p>
-              <p>(${this.state.splitAmount} / person)</p>
-            </div>
-
-            <div className="date">
-              <input type="date" onChange={this.update("date")}
-                value={this.state.date}/>
-            </div>
-
-
           </div>
-          <div className="modal-actions">
-            <button className="button-green" onClick={this.handleSubmit}>Save</button>
-          </div>
-        </div>
+
+        </Modal>
 
     </div>
   )}
