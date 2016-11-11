@@ -1,7 +1,7 @@
 
 num_users = 30
 num_bills = 60
-num_splits = 40
+num_splits = 20
 num_friendships = 10
 
 # USERS
@@ -37,9 +37,22 @@ TITLES = [
   "Girls night out",
   "Clothes for the kids",
   "Groceries",
-  "Dinner at Luxe",
+  "Dinner at Luke's",
   "Movie tkt",
-  "Dog food"
+  "Dog food",
+  "Electricity",
+  "Utilities",
+  "Rental Insurance",
+  "Car Rental",
+  "Hostel",
+  "Pizza Party @ Tom's",
+  "BevMo for Lilly's bday",
+  "Mom's bday gift",
+  "Dad's bday gift",
+  "Bday party costs",
+  "Our parents' Anniversary dinner",
+  "Family Xmas Cards",
+  "Family Xmas Pictures"
 
 ]
 
@@ -64,22 +77,31 @@ end
 
 splits = {}
 
+j=0
+num_users.times do
+  j+=1
+  user_id = users[j].id
+
+  new_num_splits = rand(num_splits)+1
+
 # Generate random splits
-for i in (1..num_splits)
-  bill_id = bills[rand(num_bills)+1].id
-  user_id = users[rand(num_users)+1].id
-  amount = (bills[bill_id].amount)/2
-
-  splits[i] = Split.new(user_id: user_id, bill_id: bill_id, amount: amount)
-  # Does the split already exist? If so, regenerate
-  until splits[i].save
+  for i in (1..new_num_splits)
     bill_id = bills[rand(num_bills)+1].id
-    user_id = users[rand(num_users)+1].id
+    # user_id = users[rand(num_users)+1].id
+    amount = (bills[bill_id].amount)/2
+
     splits[i] = Split.new(user_id: user_id, bill_id: bill_id, amount: amount)
+    # Does the split already exist? If so, regenerate
+    until splits[i].save
+      bill_id = bills[rand(num_bills)+1].id
+      # user_id = users[rand(num_users)+1].id
+      splits[i] = Split.new(user_id: user_id, bill_id: bill_id, amount: amount)
+    end
+
+    Friendship.create(user_id: user_id, friend_id: bills[bill_id].payer_id)
+
   end
-
-  Friendship.create(user_id: user_id, friend_id: bills[bill_id].payer_id)
-
+  
 end
 
 
@@ -89,8 +111,8 @@ friendships = {}
 num_users.times do
   user_id = users[rand(num_users)+1].id
 
-  num_friendships = rand(num_friendships)+1
-  for i in (1..num_friendships)
+  new_num_friendships = rand(num_friendships)+1
+  for i in (1..new_num_friendships)
 
     friend_id = users[rand(num_users)+1].id
 
