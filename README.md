@@ -70,12 +70,13 @@ The bills are grouped by their month, forming an array of bill objects. Iteratin
 
 
 When the **Add Bill** button is pressed, the `BillModal` component takes over, displaying the bill creation interface. Here is where all the magic happens:
+
 ![Bills#create](screenshots/bills-create.png)
 
 Clicking on the blue icon next to each bill opens the same `BillModal` in edit mode. The difference here is that a `GET` request is sent to the server in order to fetch the corresponding bill.
 
 #### Splitting
 While splitting may look easy on screen, there's a lot going on in the background:
-![Splits#add](screenshots/splits-add.gif)
+![Splits#add](screenshots/adding-splits.gif)
 
 Whenever a bill is created, a `POST` API call gets dispatched with all relevant data, according to the schema above. Added to that data is information regarding how the bill is being split and with whom. Such data is sent as an array of objects with keys `user_id` and `amount`. When these parameters hit Rails, new `splits` records are automatically created by the `Bill` modal. Should an error occur while the transaction is happening, such as the user forgetting to add the amount of the bill, a rollback happens and the `splits` records are never created.
