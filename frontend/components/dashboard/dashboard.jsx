@@ -29,6 +29,8 @@ class Dashboard extends React.Component {
 
 
     openModal(flag, action, id=0) {
+      this.props.clearAllErrors();
+      
       this.setState({modalOpen: flag, modalAction: action});
       // this.setState({modalAction: action});
 
@@ -40,7 +42,6 @@ class Dashboard extends React.Component {
 
     closeModal() {
       this.setState({modalOpen: false});
-      // this.props.clearFormsErrors();
     }
 
 

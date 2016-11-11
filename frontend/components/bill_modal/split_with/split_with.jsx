@@ -68,6 +68,8 @@ export default class SplitWith extends React.Component {
     // Prepping the displayed names array
     const username = event.currentTarget.innerText;
 
+    if (username === "No matches") return;
+
     const userFriends = this.props.currentUser.friends;
     const friendId = parseInt(findKey(userFriends, {username}));
     const newSplits = this.props.splitsAttributes.concat(
@@ -117,7 +119,8 @@ export default class SplitWith extends React.Component {
             onChange={this.handleInput}
             value={this.state.inputVal}
             placeholder='Split with...'
-            className="split-with-input"/>
+            className="split-with-input"
+            id="split-with-input-box"/>
 
           <ul className=
             { this.renderFriendsList ? "friends-list" : "hide-friends-list" }>
