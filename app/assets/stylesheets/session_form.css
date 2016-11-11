@@ -1,11 +1,11 @@
 .splash-screen {
   background:
   linear-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5)
+    rgba(53, 64, 80, 0.5),
+    rgba(53, 64, 80, 0.5)
   ),
   /* bottom, image */
-  url('https://images.unsplash.com/photo-1429681601148-75510b2cef43?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=b4689a61e43fe5bac972a4909167e550') center center no-repeat;
+  url('http://res.cloudinary.com/clapinton/image/upload/c_scale,w_1920/v1478883931/photo-1429681601148-75510b2cef43_wcfalc.jpg') center center no-repeat;
   background-size: cover;
   color: #ecf0f1;
   width: 100%;
@@ -22,7 +22,7 @@
 
 .splash-screen h1 {
   text-align: center;
-  margin: 80px 0;
+  margin: 30px 0 80px;
   font-size: 60px;
   text-shadow: 0px 3px 5px black;
 }

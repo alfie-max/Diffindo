@@ -42,9 +42,9 @@ class Dashboard extends React.Component {
   }
 
 
-  openModal(flag, action, id=0) {
+  openModal(type, action, id=0) {
 
-    this.setState({modalOpen: flag, modalAction: action});
+    this.setState({modalOpen: true, modalAction: action});
     // this.setState({modalAction: action});
 
     const title = (action == "create") ? "Add Bill" : "Edit Bill"
@@ -88,6 +88,8 @@ class Dashboard extends React.Component {
           onRequestClose={this.closeModal}
           overlayClassName="modal-overlay row"
           className="bill-modal">
+
+          REFACTOR HERE! IT SHOULD GO INSIDE THE BILLSMODALCONTAINER
 
           <div className="modal-title">
             <h3>{this.state.modalTitle}</h3>

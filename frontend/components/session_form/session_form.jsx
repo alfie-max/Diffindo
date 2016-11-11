@@ -118,7 +118,7 @@ class SessionForm extends React.Component {
 
     return (
       <div className = "splash-screen">
-        <div className="splash-screen-logo"><img src="http://placehold.it/100x100"/>
+        <div className="splash-screen-logo"><img src='http://res.cloudinary.com/clapinton/image/upload/c_scale,w_150/v1478883543/Logo_iojgny.png'/>
 </div>
         <h1>Split the <span>check</span> with <span>a friend</span></h1>
         <div className="session-form-wrapper">
