@@ -1,0 +1,41 @@
+class Friendship < ActiveRecord::Base
+
+  validates :user_id, :friend_id, presence: true
+
+  #Each user can only be entered once as a friend
+  validates_uniqueness_of :user_id, scope: [:friend_id]
+
+  belongs_to :user
+
+  belongs_to :friend,
+    primary_key: :id,
+    foreign_key: :friend_id,
+    class_name: :User
+
+  before_create :validate_different_users
+
+  after_create :create_inverse, unless: :has_inverse?
+  after_destroy :destroy_inverses, if: :has_inverse?
+
+
+  def create_inverse
+    self.class.create(inverse_friendship_options)
+  end
+
+  def destroy_inverses
+    inverses.destroy_all
+  end
+
+  def has_inverse?
+    self.class.exists?(inverse_friendship_options)
+  end
+
+  def inverses
+    self.class.where(inverse_friendship_options)
+  end
+
+  def inverse_friendship_options
+    { friend_id: user_id, user_id: friend_id }
+  end
+
+end

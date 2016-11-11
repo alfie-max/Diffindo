@@ -34,16 +34,15 @@ class User < ActiveRecord::Base
     through: :splits,
     source: :bill
 
-# NEED TO FIX ASSOCIATIONS
-  # has_many :friends_associations,
+  has_many :friendships, dependent: :destroy
+
+  has_many :friends,
+    through: :friendships,
+    source: :friend
+
+  # has_many :friendships_of,
   #   primary_key: :id,
-  #   foreign_key: :user_id,
-  #   class_name: :Friend
-  #
-  # has_many :friends,
-  #   through: :friends_associations,
-  #   source: :friend
-  #
+  #   foreign_key: :friend_id
 
   after_initialize :ensure_session_token
 
@@ -88,9 +87,9 @@ class User < ActiveRecord::Base
     .order(:date)
   end
 
-  def friends
-    # DELETE THIS WHEN FRIENDING IS DONE
-    User.all
-  end
+  # def friends
+  #   # DELETE THIS WHEN FRIENDING IS DONE
+  #   User.all
+  # end
 
 end

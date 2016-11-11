@@ -1,7 +1,8 @@
 
-num_users = 11
-num_bills = 30
-num_splits = 20
+num_users = 30
+num_bills = 60
+num_splits = 40
+num_friendships = 10
 
 # USERS
 
@@ -13,7 +14,7 @@ for i in (1..num_users-1)
   users[i] = User.create!(username: username, email: email, password: "password", activated: true)
 end
 
-guest = User.create!(username: "Meryl", email: "meryl@burbankgalaxy.com", password: "password", activated: true)
+guest = User.create!(username: "Meryl Burbank", email: "meryl@burbankgalaxy.com", password: "password", activated: true)
 
 users[num_users] = guest
 
@@ -30,7 +31,16 @@ TITLES = [
   "PGE",
   "hotel in NY",
   "Plane tkt for Israel",
-  "brunch @ Hobee's"
+  "brunch @ Hobee's",
+  "Subway lunch",
+  "Cookies from Specialties",
+  "Girls night out",
+  "Clothes for the kids",
+  "Groceries",
+  "Dinner at Luxe",
+  "Movie tkt",
+  "Dog food"
+
 ]
 
 bills = {}
@@ -66,5 +76,13 @@ for i in (1..num_splits)
     user_id = users[rand(11)+1].id
     splits[i] = Split.new(user_id: user_id, bill_id: bill_id, amount: amount)
   end
+
+end
+
+
+# FRIENDSHIPS
+for i in (1..num_friendships)
+  user_id = users[rand(11)+1].id
+  friend_id = users[rand(11)+1].id
 
 end
