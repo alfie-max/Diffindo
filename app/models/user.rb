@@ -34,15 +34,14 @@ class User < ActiveRecord::Base
     through: :splits,
     source: :bill
 
-  has_many :friendships, dependent: :destroy
+  has_many :friendships, inverse_of: :user, dependent: :destroy
 
   has_many :friends,
     through: :friendships,
     source: :friend
 
-  # has_many :friendships_of,
-  #   primary_key: :id,
-  #   foreign_key: :friend_id
+  accepts_nested_attributes_for :friendships, allow_destroy: false
+
 
   after_initialize :ensure_session_token
 

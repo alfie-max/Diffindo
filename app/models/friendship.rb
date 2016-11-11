@@ -1,18 +1,18 @@
 class Friendship < ActiveRecord::Base
 
-  validates :user_id, :friend_id, presence: true
+  # The presence of user has to be validates instead of user_id so the inverse_of / accepts_nested_attributes_for can work properly. If not, it will raise an error saying "Friendships user_id can't be blank"
+  validates :user, :friend_id, presence: true
 
   #Each user can only be entered once as a friend
   validates_uniqueness_of :user_id, scope: [:friend_id]
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :friendships
 
   belongs_to :friend,
     primary_key: :id,
     foreign_key: :friend_id,
     class_name: :User
 
-  before_create :validate_different_users
 
   after_create :create_inverse, unless: :has_inverse?
   after_destroy :destroy_inverses, if: :has_inverse?

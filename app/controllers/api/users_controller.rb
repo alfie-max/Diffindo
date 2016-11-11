@@ -27,6 +27,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :activated)
+    params.require(:user).permit(:username, :email, :password, :activated,
+      friendships_attributes: [:id, :friend_id])
   end
 end
