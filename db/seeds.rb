@@ -57,13 +57,14 @@ splits = {}
 for i in (1..num_splits)
   bill_id = bills[rand(30)+1].id
   user_id = users[rand(11)+1].id
-  while user_id == bills[bill_id].payer_id
+  amount = (bills[bill_id].amount)/2
+
+  splits[i] = Split.new(user_id: user_id, bill_id: bill_id, amount: amount)
+  # Does the split already exist? If so, regenerate
+  until splits[i].save
+    bill_id = bills[rand(30)+1].id
     user_id = users[rand(11)+1].id
+    splits[i] = Split.new(user_id: user_id, bill_id: bill_id, amount: amount)
   end
 
-  amount = bills[bill_id].amount/2
-
-  puts("Bill ID: #{bill_id}")
-
-  splits[i] = Split.create!(user_id: user_id, bill_id: bill_id, amount: amount)
 end
