@@ -33,6 +33,7 @@ All of the app's styling was done by drawing inspiration from dashboards, signup
 
 ### Bills CRUD
 Bills are the core of Diffindo, with each record storing the following:
+
 | Column | Type | Constraint |
 |------|:-----------:|:-------:|
 | title | string | null: false |
