@@ -52,8 +52,12 @@
   position: relative;
 }
 
+.splits-with-form input {
+  width: 100%;
+}
+
 .splits-list {
-  margin-bottom: 5
+  margin-bottom: 5px;
 }
 
 .splits-list i {

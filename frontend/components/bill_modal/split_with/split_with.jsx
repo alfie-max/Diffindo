@@ -111,6 +111,7 @@ export default class SplitWith extends React.Component {
       <div>
 
         <ul className="splits-list clearfix">
+          <li key={`split-you`}>You</li>
           { splitsList }
         </ul>
 

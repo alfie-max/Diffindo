@@ -12,6 +12,7 @@ class BillsModal extends React.Component {
       category_id: 1,
       author_id: this.props.currentUser.id,
       payer_id: this.props.currentUser.id,
+      payer: "",
       date: "",
       docUrl: "",
       split_type: "even",
@@ -40,6 +41,15 @@ class BillsModal extends React.Component {
       const splits_attributes = [{user_id: this.props.currentUser.id}];
       this.setState({splits_attributes});
     }
+
+    const keyDownHandler = event => {
+      if (event.keyCode === 27) {
+        document.removeEventListener("billModalEscape", keyDownHandler);
+        this.props.closeModal();
+      }
+    }
+
+    document.addEventListener("billModalEscape", keyDownHandler, false);
   }
 
   componentWillReceiveProps({billForm, billDetail, errors}) {
@@ -88,13 +98,12 @@ class BillsModal extends React.Component {
     e.preventDefault();
     let bill = this.state;
     bill.splits_attributes = this.prepareSplitsArray(bill);
+    this.props.clearAllErrors();
     this.props.processForm({bill});
     this.hasSubmitForm = true;
   }
 
   prepareSplitsArray(bill) {
-
-
     // Adds payer_id to newSplits if new bill
     // Compares current splits with what's on store's state:
     // • New elements should be added;
@@ -102,7 +111,11 @@ class BillsModal extends React.Component {
     // • Same elements are left alone
     // Lastly, should add splitAmount to all users on splits array.
 
-    const existingSplits = this.props.billDetail.splits_attributes;
+    let existingSplits = [];
+    if (this.props.billId) {
+      existingSplits = this.props.billDetail.splits_attributes;
+    };
+
     let newSplits = this.state.splits_attributes;
     let resultingSplits = newSplits;
 
@@ -137,6 +150,13 @@ class BillsModal extends React.Component {
 
 
   render() {
+
+    let payerName;
+     if (this.state.payer_id == this.props.currentUser.id) {
+       payerName = "you";
+     } else {
+       payerName = this.state.payer;
+     }
 
     return (
     <div>
@@ -173,7 +193,7 @@ class BillsModal extends React.Component {
             </div>
 
             <div className="payment-info">
-              <p>Paid by <span>you</span> and split equally</p>
+              <p>Paid by <span>{payerName}</span> and split equally</p>
               <p>(${this.state.splitAmount} / person)</p>
             </div>
 

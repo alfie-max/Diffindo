@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import Dashboard from './dashboard';
 import { clearAllErrors } from '../../actions/forms_actions';
 
- const mapStateToProps = ({session}) => ({
-   currentUser: session.currentUser
+ const mapStateToProps = ({session, formsErrors}) => ({
+   currentUser: session.currentUser,
+   billsErrors: formsErrors.billErrors,
  });
 
  const mapDispatchToProps = (dispatch) => ({

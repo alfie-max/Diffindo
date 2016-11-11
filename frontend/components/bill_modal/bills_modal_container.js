@@ -1,16 +1,21 @@
 import { connect } from 'react-redux';
 import BillsModal from './bills_modal';
 import {
-  createBill, updateBill, requestSingleBill, clearBillsErrors
+  createBill, updateBill, requestSingleBill
   } from '../../actions/bills_actions';
+import {clearAllErrors} from '../../actions/forms_actions';
 
-const mapStateToProps = ({session, billDetail, formsErrors}, {billForm, closeModal}) => {
+const mapStateToProps = (
+  {session, billDetail, bills, formsErrors},
+  {billForm, closeModal, formSubmit}) => {
   return {
     currentUser: session.currentUser,
     billDetail,
     billId: billForm.billId,
     errors: formsErrors.billErrors,
-    closeModal
+    closeModal,
+    formSubmit,
+    bills
   }
 };
 
@@ -21,7 +26,7 @@ const mapDispatchToProps = (dispatch, {billForm}) => {
     //ownProps obj comes from the parent component, defined on the root Route
     processForm: bill => dispatch(processForm(bill)),
     requestSingleBill: id => dispatch(requestSingleBill(id)),
-    clearBillsErrors: () => dispatch(clearBillsErrors())
+    clearAllErrors: () => dispatch(clearAllErrors())
   }
 
 };

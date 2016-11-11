@@ -21,7 +21,6 @@ const FormsErrorsReducer = (state=_defaultState, action) => {
       return merge({}, _defaultState, {billErrors});
 
     case CLEAR_ALL_ERRORS:
-      console.log("FormsErrorsReducer ", _defaultState);
       return _defaultState;
 
     default:

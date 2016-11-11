@@ -22,33 +22,49 @@ class Dashboard extends React.Component {
 
     }
 
+    // this.hasSubmitForm = false;
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    // this.formSubmit = this.formSubmit.bind(this);
 
   }
 
 
-    openModal(flag, action, id=0) {
-      this.props.clearAllErrors();
-      
-      this.setState({modalOpen: flag, modalAction: action});
-      // this.setState({modalAction: action});
+  componentWillReceiveProps() {
+    console.log("db receiving props");
+    // if (this.hasSubmitForm && billsErrors.length === 0) {
+    //   this.closeModal();
+    //   this.hasSubmitForm = false;
+    // } else {
+    //   this.hasSubmitForm = false;
+    // }
+  }
 
-      const title = (action == "create") ? "Add Bill" : "Edit Bill"
-      this.setState({modalTitle: title, billId: id});
 
-      // this.setState({billId: id})
-    }
+  openModal(flag, action, id=0) {
 
-    closeModal() {
-      this.setState({modalOpen: false});
-    }
+    this.setState({modalOpen: flag, modalAction: action});
+    // this.setState({modalAction: action});
+
+    const title = (action == "create") ? "Add Bill" : "Edit Bill"
+    this.setState({modalTitle: title, billId: id});
+
+    // this.setState({billId: id})
+  }
+
+  // formSubmit() {
+  //   console.log("Form submitted");
+  //   this.hasSubmitForm = true;
+  // }
+
+  closeModal() {
+    this.setState({modalOpen: false});
+    this.props.clearAllErrors();
+  }
 
 
   render() {
-
-    //FOR CREATING A NEW BILL:
-    //ADD ALL USERS THAT ARE BEING SPLIT WITH + PAYING USER TO AN ARRAY OF OBJS: [{user_id, amount}] PASS THAT ARRAY TO splits_attributes WHEN CALLING Bill#create
 
     return(
       <div className="row dashboard clearfix">
@@ -78,7 +94,11 @@ class Dashboard extends React.Component {
             <i className="fa fa-times" aria-hidden="true" onClick={this.closeModal}></i>
           </div>
 
-          <BillsModalContainer billForm={this.state} closeModal={this.closeModal}/>
+          <BillsModalContainer
+            billForm={this.state}
+            closeModal={this.closeModal}
+            formSubmit={this.formSubmit}
+            />
 
         </Modal>
 
