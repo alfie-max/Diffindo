@@ -29,7 +29,6 @@ export default class AddFriend extends React.Component {
   }
 
   componentWillReceiveProps({errors}) {
-    console.log("errors are ",errors);
     if (this.hasSubmitForm && errors.length === 0) {
       this.props.closeModal();
       this.hasSubmitForm = false;
