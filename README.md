@@ -16,6 +16,7 @@ Diffindo is a WIP, but some core features have already been implemented:
 | View, create, edit and delete bills | DEPLOYED | |
 | Add friends | In Progress | Possible to add a friend through e-mail, but no confirmation is sent yet. |
 | Split bills with friends | DEPLOYED | |
+| Responsiveness (media queries) | | |
 | Create Groups                              | | |
 | Upcoming bills                             | | |
 | Monthly trend                              | | |
@@ -29,7 +30,7 @@ Diffindo is a WIP, but some core features have already been implemented:
 ## Implementation
 
 ### A note on styling
-All of the app's styling was done by drawing inspiration from dashboards, signup forms and other elements from other products and designers. All CSS was written from scratch, including the grid system which borrows from Bootstrap's terminology.
+All of the app's styling was done by drawing inspiration from dashboards, signup forms and other elements from other products and designers. All CSS was written from scratch, including the grid system which borrows from Bootstrap's terminology. Because of that, mobile responsiveness and media queries have not yet been implemented.
 
 ### Bills CRUD
 Bills are the core of Diffindo, with each record storing the following:
