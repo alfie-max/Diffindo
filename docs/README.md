@@ -25,7 +25,7 @@ MVP criteria, which MUST be met by end of 2nd week, are as follow:
 * Bills CRUD
 * Add Friends
 * Transaction History / Recent Activity
-* Expense Comments
+* Splitting Bills
 * Production README, summarizing how each feature was implemented
 
 All features must be in full, bug-free working condition, with adequate seed data and sufficient CSS styling.
@@ -47,6 +47,7 @@ In no particular order:
 * E-mail debt reminder
 * Auto Charity donation
 * Add friends from Bill create screen
+* Add comments to bills
 
 ## UI
 
