@@ -33,3 +33,9 @@ export const numberOfActiveSplits = splits => {
   // are being destroyed.
 
 }
+
+export const selectUserFriends = user => {
+  let friendsList;
+  return values(user.friends);
+  
+}

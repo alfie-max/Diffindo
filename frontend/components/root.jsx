@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
 import DashboardContainer from './dashboard/dashboard_container';
+import ListFriendsContainer from './friends/list_friends_container';
 import { requestAllBills } from '../actions/bills_actions';
 
 const Root = ({store}) => {
@@ -37,6 +38,7 @@ const Root = ({store}) => {
             onEnter={redirectIfLoggedIn}/>
           <Route path="/signup" component={SessionFormContainer}
             onEnter={redirectIfLoggedIn}/>
+          <Route path="/friends" component={ListFriendsContainer}/>
         </Route>
       </Router>
     </Provider>

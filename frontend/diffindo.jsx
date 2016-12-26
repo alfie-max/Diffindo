@@ -23,7 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const dashboardView = document.getElementsByClassName("main-view")[0];
   Modal.setAppElement(document.body);
+  
+  window.store = store;
 
   ReactDOM.render(<Root store={store} />, rootEl);
+
 
 });
