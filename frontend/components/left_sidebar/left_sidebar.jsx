@@ -43,7 +43,7 @@ class LeftSidebar extends React.Component {
   }
 
   render() {
-    const friendsList = values(this.props.currentUser.friends);
+    const friendsList = values(this.props.currentUser.friends).slice(0, 3);
     const renderFriends = friendsList.map(
        (friend, idx) => (
       <li key={`friend-${idx}`}>{friend.username}</li>
