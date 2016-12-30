@@ -1,4 +1,4 @@
-# Diffindo
+# Diffindo • [![Gem Version](https://badge.fury.io/rb/rails.svg)](https://badge.fury.io/rb/rails) [![npm version](https://badge.fury.io/js/react.svg)](https://badge.fury.io/js/react)
 
 Diffindo is a web app inspired by SplitWise. It allows users to generate, settle and keep track of split bills with other users.
 
